@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: '/era-lexicon',
+  basePath: process.env.NODE_ENV === 'production' ? '/era-lexicon' : '',
   images: {
     unoptimized: true,
   },
