@@ -33,6 +33,7 @@ export default function Home() {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [memeData, setMemeData] = useState<MemeData[]>([])
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
+  const [showSources, setShowSources] = useState(false)
 
   // Generate timeline: current month back to Jan 2007
   const timeline = useMemo(() => {
@@ -152,11 +153,20 @@ export default function Home() {
       <div className="sticky top-0 left-0 right-0 z-50 px-4 md:px-8 pt-4 md:pt-6 pb-3 md:pb-4 bg-black/90 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto">
           {/* Title and Stats */}
-          <div className="flex items-center justify-between mb-4 md:mb-8">
-            <div>
+          <div className="flex items-start justify-between mb-4 md:mb-6 gap-4">
+            <div className="space-y-2">
               <h1 className="text-lg md:text-2xl font-light tracking-[0.2em] md:tracking-[0.3em] text-white/90">
                 ERALEXICON
               </h1>
+              <p className="text-xs md:text-sm text-white/60 max-w-2xl">
+                Internet culture word cloud explorer—browse monthly language shifts and era-specific media in one interactive view.
+              </p>
+              <button
+                className="text-[11px] md:text-xs text-white/60 underline hover:text-white transition"
+                onClick={() => setShowSources((v) => !v)}
+              >
+                {showSources ? 'Hide data sources' : 'What data sources are used?'}
+              </button>
             </div>
             
             <div className="text-right">
@@ -170,6 +180,15 @@ export default function Home() {
               )}
             </div>
           </div>
+
+          {showSources && (
+            <div className="mb-4 md:mb-6 text-[11px] md:text-xs text-white/70 bg-white/5 border border-white/10 rounded-lg p-3 md:p-4 space-y-1">
+              <p className="font-semibold text-white/80">Data sources</p>
+              <p>• Era word sets are curated and randomized per month (no live scraping).</p>
+              <p>• Meme reference list: curated CSV in <code className="text-white/80">data/memes.csv</code>.</p>
+              <p>• Media thumbnails: era-based YouTube IDs (static list).</p>
+            </div>
+          )}
 
           {/* Timeline Slider */}
           <div className="max-w-5xl mx-auto">
