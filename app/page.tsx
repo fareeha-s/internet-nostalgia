@@ -17,10 +17,17 @@ export default function Home() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
   const [showSources, setShowSources] = useState(false)
   const [randomSeed] = useState(() => Math.random()) // Shuffle on page load
-  const [loadedCount, setLoadedCount] = useState(1) // Only load 1 section initially
+  const [loadedCount, setLoadedCount] = useState(10) // Load 10 sections initially for smoother start
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
+  const [isMounted, setIsMounted] = useState(false)
   const loadMoreRef = useRef<HTMLDivElement | null>(null)
   const yearObserverRef = useRef<IntersectionObserver | null>(null)
+
+  // Delay animations slightly to prevent jank on initial load
+  useEffect(() => {
+    const timer = setTimeout(() => setIsMounted(true), 100)
+    return () => clearTimeout(timer)
+  }, [])
 
   // Generate timeline: current year back to 2000, BUT recent years get more "segments"
   // (so they take longer to scroll through, reflecting higher meme density).
@@ -98,13 +105,13 @@ export default function Home() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
-          // Load 3 more sections when user scrolls near the bottom
-          setLoadedCount(prev => Math.min(prev + 3, timeline.length))
+        if (entries[0].isIntersecting && loadedCount < timeline.length) {
+          // Load 5 more sections when user scrolls near the bottom
+          setLoadedCount(prev => Math.min(prev + 5, timeline.length))
         }
       },
       {
-        rootMargin: '800px', // Load more when 800px away from bottom
+        rootMargin: '1000px', // Load more when 1000px away from bottom
         threshold: 0
       }
     )
@@ -114,7 +121,7 @@ export default function Home() {
     }
 
     return () => observer.disconnect()
-  }, [timeline.length])
+  }, [timeline.length, loadedCount])
 
   // Set up intersection observer for year tracking
   useEffect(() => {
@@ -316,7 +323,7 @@ export default function Home() {
               ref={(el) => {
                 if (el && yearObserverRef.current) yearObserverRef.current.observe(el)
               }}
-              className="px-2 sm:px-4 md:px-8"
+              className={`px-2 sm:px-4 md:px-8 transition-opacity duration-500 ${isMounted ? 'opacity-100' : 'opacity-0'}`}
             >
               <FloatingWordCloud
                 words={card.wordCloudWords}

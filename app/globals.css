@@ -82,18 +82,22 @@ html {
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  animation-play-state: running;
 }
 
 .floating-word:nth-child(2n) {
   animation-duration: 4.5s;
+  animation-delay: 0.1s;
 }
 
 .floating-word:nth-child(3n) {
   animation-duration: 5s;
+  animation-delay: 0.2s;
 }
 
 .floating-word:nth-child(5n) {
   animation-duration: 3.5s;
+  animation-delay: 0.15s;
 }
 
 /* Normal cursor */
