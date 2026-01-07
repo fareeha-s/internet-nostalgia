@@ -19,18 +19,8 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Chocolate Rain',
-      id: 'EwTZ2xpQwpA',
-    },
-    {
-      type: 'youtube',
       title: 'Leave Britney Alone',
       id: 'kHmvkRoEowc',
-    },
-    {
-      type: 'youtube',
-      title: 'Rick Roll',
-      id: 'dQw4w9WgXcQ',
     },
     {
       type: 'youtube',
@@ -39,13 +29,23 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Numa Numa Dance',
-      id: 'KmtzQCSh6xk',
+      title: 'Shoes - Liam Kyle Sullivan',
+      id: 'wCF3ywukQYA',
     },
     {
       type: 'youtube',
-      title: 'Evolution of Dance',
-      id: 'dMH0bHeiRNg',
+      title: 'Diet Coke Mentos',
+      id: 'hKoB0MHVBvM',
+    },
+    {
+      type: 'youtube',
+      title: 'Sneezing Panda',
+      id: 'FzRH3iTQPrk',
+    },
+    {
+      type: 'youtube',
+      title: 'Grape Lady Falls',
+      id: 'STbhaqsBJB0',
     },
   ],
   
@@ -72,23 +72,23 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Harlem Shake',
+      title: 'Harlem Shake Original',
       id: '384IUU43Vos',
     },
     {
       type: 'youtube',
-      title: 'Call Me Maybe',
-      id: 'fWNaR-rxAic',
+      title: 'Honey Badger Don\'t Care',
+      id: '4r7wHMg5Yjg',
     },
     {
       type: 'youtube',
-      title: 'Kony 2012',
-      id: 'Y4MnpzG5Sqc',
+      title: 'Bad Lip Reading NFL',
+      id: 'Zce-QT7MGSE',
     },
     {
       type: 'youtube',
-      title: 'Bed Intruder Song',
-      id: 'hMtZfW2z9dw',
+      title: 'Ain\'t Nobody Got Time',
+      id: 'bFEoMO0pc7k',
     },
   ],
   
@@ -105,26 +105,41 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'The Dress',
+      title: 'The Dress - Blue/Gold',
       id: 'AskAQwOBvhc',
-    },
-    {
-      type: 'youtube',
-      title: 'Flappy Bird',
-      id: 'fQoJZP0mR5k',
     },
     {
       type: 'youtube',
       title: 'Left Shark Super Bowl',
       id: 'WmcWZ2Bzoho',
     },
+    {
+      type: 'youtube',
+      title: 'Why You Always Lying',
+      id: 'qlOTNtUvhe8',
+    },
+    {
+      type: 'youtube',
+      title: 'Yodel Kid Walmart',
+      id: 'bOZT-UpRA2Y',
+    },
+    {
+      type: 'youtube',
+      title: 'Best Vines Compilation',
+      id: 'G-T3qKl6y-c',
+    },
+    {
+      type: 'youtube',
+      title: 'Charlie Sheen Winning',
+      id: '9QS0q3mGPGg',
+    },
   ],
   
   '2016-2018': [
     {
       type: 'youtube',
-      title: 'Damn Daniel',
-      id: 'a16Kgh7j8zk',
+      title: 'Cash Me Outside Dr Phil',
+      id: 'jgflCE7zRpc',
     },
     {
       type: 'youtube',
@@ -133,46 +148,76 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Cash Me Outside',
-      id: 'jgflCE7zRpc',
+      title: 'United Breaks Guitar',
+      id: '5YGc4zOqozo',
     },
     {
       type: 'youtube',
-      title: 'Yodeling Walmart Kid',
-      id: 'bOZT-UpRA2Y',
+      title: 'Tide Pod Challenge',
+      id: 'pM6wanZOLtk',
     },
     {
       type: 'youtube',
-      title: 'In My Feelings Challenge',
-      id: 'DRS_PpOrUZ4',
+      title: 'Logan Paul Japan Incident',
+      id: 'ZMxQHQj5-jo',
+    },
+    {
+      type: 'youtube',
+      title: 'Salt Bae',
+      id: 'J5GGG0PaSe4',
+    },
+    {
+      type: 'youtube',
+      title: 'Fidget Spinner Tricks',
+      id: 'Yx7e8qQy56U',
+    },
+    {
+      type: 'youtube',
+      title: 'Ugandan Knuckles',
+      id: 'Hxjofn2bYE8',
     },
   ],
   
   '2019-2021': [
     {
       type: 'youtube',
-      title: 'Old Town Road',
-      id: 'r7qovpFAGrQ',
-    },
-    {
-      type: 'youtube',
-      title: 'Bernie Sanders Mittens',
+      title: 'Bernie Sanders Mittens Meme',
       id: 'KgbBP9Em00A',
     },
     {
       type: 'youtube',
-      title: 'Coffin Dance',
+      title: 'Coffin Dance Meme',
       id: 'iLBBRuVDOo4',
     },
     {
       type: 'youtube',
-      title: 'Among Us Animation',
+      title: 'Among Us Original Trailer',
       id: 'grd-K33tOSM',
     },
     {
       type: 'youtube',
-      title: 'Corn Kid',
-      id: 'cqd_X7GS_SU',
+      title: 'Woman Yelling at Cat',
+      id: 'QmZw8cT4qBM',
+    },
+    {
+      type: 'youtube',
+      title: 'Ratatouille Musical TikTok',
+      id: 'M1EcVWSSgOY',
+    },
+    {
+      type: 'youtube',
+      title: 'Zoom Meeting Fails',
+      id: 'DYW5AfYt0Ss',
+    },
+    {
+      type: 'youtube',
+      title: 'Sea Shanty TikTok',
+      id: '8q8WvQlPrw8',
+    },
+    {
+      type: 'youtube',
+      title: 'Fauci Ouchie Remix',
+      id: 'Xvr2M7MvOY0',
     },
   ],
   
@@ -184,61 +229,66 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Grimace Shake',
+      title: 'Grimace Shake Trend',
       id: '9LUMx2qPDlQ',
     },
     {
       type: 'youtube',
-      title: 'Barbenheimer',
-      id: '5m5fjQzoV0U',
+      title: 'Corn Kid Interview',
+      id: '_caMQpiwiaU',
     },
     {
       type: 'youtube',
-      title: 'Subway Surfers Gameplay',
-      id: 'RMPPjKy42bw',
+      title: 'Girl Explaining Dinner',
+      id: 'yfPjpW5DPKk',
     },
     {
       type: 'youtube',
-      title: 'Brain Rot Explained',
-      id: 'Xq3W4FoqKW4',
+      title: 'Bing Chilling John Cena',
+      id: 'bOZ2b5adjd4',
+    },
+    {
+      type: 'youtube',
+      title: 'Roman Empire TikTok',
+      id: 'SNYLv9TgsTA',
+    },
+    {
+      type: 'youtube',
+      title: 'Girl Dinner Explained',
+      id: 'gKzWLM-AUt8',
+    },
+    {
+      type: 'youtube',
+      title: 'NPC Livestream',
+      id: '0zG_lckuzbo',
     },
   ],
   
   '2025-2026': [
     {
       type: 'youtube',
-      title: 'Charli XCX - Apple',
-      id: 'h64RD_qHbwY',
+      title: 'Very Demure Very Mindful',
+      id: 'wWHjV35mh6k',
     },
     {
       type: 'youtube',
-      title: 'Sabrina Carpenter - Espresso',
-      id: 'eVli-tstM5E',
+      title: 'Hawk Tuah Girl Interview',
+      id: 'oIkhyHPMcAg',
     },
     {
       type: 'youtube',
-      title: 'Billie Eilish - LUNCH',
-      id: 'R0X8ZLZVQ3E',
+      title: 'Moo Deng Baby Hippo',
+      id: 'R7DhGLXp_6E',
     },
     {
       type: 'youtube',
-      title: 'Chappell Roan - Good Luck, Babe!',
-      id: 'GxldQ9IdV-w',
-    },
-    {
-      type: 'youtube',
-      title: 'Kendrick Lamar - Not Like Us',
-      id: 'dQw4w9WgXcQ',
-    },
-    {
-      type: 'youtube',
-      title: 'Tyla - Water',
-      id: 'bRYG_26wwjk',
-    },
-    {
-      type: 'youtube',
-      title: 'Mr Beast $1 vs $500,000 Plane Ticket',
+      title: 'Mr Beast $1 vs $500,000',
       id: 'sxb6b7tN2KE',
+    },
+    {
+      type: 'youtube',
+      title: 'Apple Dance Trend',
+      id: 'qYApvyc0S4k',
     },
     {
       type: 'youtube',
@@ -247,23 +297,23 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Deadpool & Wolverine Trailer',
-      id: '73_1biulkYk',
+      title: 'Skibidi Toilet 77',
+      id: 'WIJmzvQWeTo',
     },
     {
       type: 'youtube',
-      title: 'Inside Out 2 Trailer',
-      id: 'LEjhY15eCx0',
+      title: 'Sigma Grindset Meme',
+      id: '1-emQo-7O3Y',
     },
     {
       type: 'youtube',
-      title: 'Dune Part Two Trailer',
-      id: 'Way9Dexny3w',
+      title: 'AI Sora Demo',
+      id: 'HK6y8DAPN_0',
     },
     {
       type: 'youtube',
-      title: 'Moo Deng Baby Hippo',
-      id: 'R7DhGLXp_6E',
+      title: 'ChatGPT-4o Demo',
+      id: 'DQacCB9tDaw',
     },
   ],
 }
