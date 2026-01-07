@@ -36,6 +36,7 @@ export default function Home() {
   const [memeData, setMemeData] = useState<MemeData[]>([])
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
   const [showSources, setShowSources] = useState(false)
+  const [shuffleKey, setShuffleKey] = useState(0)
 
   // Generate timeline: current month back to Jan 2007
   const timeline = useMemo(() => {
@@ -109,6 +110,7 @@ export default function Home() {
     const date = timeline[index]
     if (date) {
       setCurrentDate(date)
+      setShuffleKey(prev => prev + 1) // Trigger content shuffle
     }
   }
   
@@ -119,6 +121,16 @@ export default function Home() {
   
   const handleSliderMouseDown = () => {
     setIsDragging(true)
+  }
+
+  // Shuffle utility function
+  const shuffleArray = <T,>(array: T[]): T[] => {
+    const shuffled = [...array]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+    return shuffled
   }
 
   const wordCloudWords = useMemo(
@@ -154,7 +166,7 @@ export default function Home() {
     ).length
   }, [data, memeData])
 
-  // Get media for current era
+  // Get media for current era and shuffle
   const currentMedia = useMemo(() => {
     const year = currentDate.getFullYear()
     let era = '2025-2026'
@@ -164,10 +176,10 @@ export default function Home() {
     if (year < 2016) era = '2013-2015'
     if (year < 2013) era = '2010-2012'
     if (year < 2010) era = '2007-2009'
-    return ERA_MEDIA[era] || []
-  }, [currentDate])
+    return shuffleArray(ERA_MEDIA[era] || [])
+  }, [currentDate, shuffleKey])
 
-  // Get songs for current era
+  // Get songs for current era and shuffle
   const currentSongs = useMemo(() => {
     const year = currentDate.getFullYear()
     let era = '2025-2026'
@@ -177,10 +189,10 @@ export default function Home() {
     if (year < 2016) era = '2013-2015'
     if (year < 2013) era = '2010-2012'
     if (year < 2010) era = '2007-2009'
-    return ERA_SONGS[era] || []
-  }, [currentDate])
+    return shuffleArray(ERA_SONGS[era] || [])
+  }, [currentDate, shuffleKey])
 
-  // Get tweets for current era
+  // Get tweets for current era and shuffle
   const currentTweets = useMemo(() => {
     const year = currentDate.getFullYear()
     let era = '2025-2026'
@@ -190,8 +202,8 @@ export default function Home() {
     if (year < 2016) era = '2013-2015'
     if (year < 2013) era = '2010-2012'
     if (year < 2010) era = '2007-2009'
-    return ERA_TWEETS[era] || []
-  }, [currentDate])
+    return shuffleArray(ERA_TWEETS[era] || [])
+  }, [currentDate, shuffleKey])
 
   return (
     <main className="relative min-h-screen bg-black flex flex-col">
@@ -298,7 +310,7 @@ export default function Home() {
               songs={currentSongs}
               tweets={currentTweets}
               onVideoSelect={setSelectedVideo}
-              key={`${currentDate.getFullYear()}-${currentDate.getMonth()}`} 
+              key={`${currentDate.getFullYear()}-${currentDate.getMonth()}-${shuffleKey}`} 
             />
             <MediaGallery media={currentMedia} selectedVideo={selectedVideo} onClose={() => setSelectedVideo(null)} />
           </>
