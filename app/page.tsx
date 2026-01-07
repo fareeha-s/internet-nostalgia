@@ -16,12 +16,17 @@ interface WordData {
 export default function Home() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
   const [showSources, setShowSources] = useState(false)
-  const [randomSeed] = useState(() => Math.random()) // Shuffle on page load
+  const [randomSeed, setRandomSeed] = useState(0) // Initialize with 0, set on client
   const [loadedCount, setLoadedCount] = useState(10) // Load 10 sections initially for smoother start
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
   const [isMounted, setIsMounted] = useState(false)
   const loadMoreRef = useRef<HTMLDivElement | null>(null)
   const yearObserverRef = useRef<IntersectionObserver | null>(null)
+
+  // Set random seed on client only to avoid hydration mismatch
+  useEffect(() => {
+    setRandomSeed(Math.random())
+  }, [])
 
   // Delay animations slightly to prevent jank on initial load
   useEffect(() => {
