@@ -287,24 +287,24 @@ export default function Home() {
         )}
       </div>
 
-      {/* Horizontal Scroll Container */}
+      {/* Horizontal Scroll Container - Continuous flow */}
       <div 
         ref={scrollContainerRef}
-        className="flex-1 overflow-x-auto overflow-y-auto pt-20 md:pt-24 pb-20 md:pb-24"
+        className="flex-1 overflow-x-auto overflow-y-auto pt-20 md:pt-24 pb-16 md:pb-20"
         style={{ 
           scrollBehavior: 'smooth',
           WebkitOverflowScrolling: 'touch',
         }}
       >
         <div 
-          className={`flex transition-opacity duration-1000 ${isMounted ? 'opacity-100' : 'opacity-0'}`}
-          style={{ minHeight: 'calc(100vh - 160px)' }}
+          className={`flex items-start transition-opacity duration-1000 ${isMounted ? 'opacity-100' : 'opacity-0'}`}
+          style={{ minHeight: 'calc(100vh - 140px)' }}
         >
           {yearData.map((data, index) => (
-            <section
+            <div
               key={data.year}
               data-year={data.year}
-              className="flex-shrink-0 w-screen md:w-[85vw] lg:w-[75vw] px-4 md:px-8 py-4"
+              className="flex-shrink-0"
             >
               <FloatingWordCloud
                 words={data.wordCloudWords}
@@ -313,23 +313,23 @@ export default function Home() {
                 tweets={data.tweets}
                 onVideoSelect={setSelectedVideo}
               />
-            </section>
+            </div>
           ))}
 
           {/* End marker */}
-          <div className="flex-shrink-0 w-screen md:w-[40vw] flex items-center justify-center px-8">
-            <div className="text-center space-y-4">
-              <h2 className="text-3xl md:text-5xl font-light text-white/80 tracking-wide">
+          <div className="flex-shrink-0 flex items-center justify-center px-8 min-w-[200px]">
+            <div className="text-center space-y-3">
+              <h2 className="text-2xl md:text-4xl font-light text-white/60 tracking-wide">
                 2000
               </h2>
-              <p className="text-sm md:text-base text-white/50">
-                Forums. Flash. Dial-up.
+              <p className="text-xs md:text-sm text-white/40">
+                the beginning
               </p>
               <button
                 onClick={() => scrollContainerRef.current?.scrollTo({ left: 0, behavior: 'smooth' })}
-                className="mt-4 text-white/50 hover:text-white/80 transition-colors text-sm"
+                className="text-white/40 hover:text-white/70 transition-colors text-xs"
               >
-                ← back to present
+                ← back
               </button>
             </div>
           </div>

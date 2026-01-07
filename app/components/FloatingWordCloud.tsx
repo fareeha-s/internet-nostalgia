@@ -268,7 +268,7 @@ export default function FloatingWordCloud({ words, media = [], songs = [], tweet
   }
 
   return (
-    <div className="flex flex-wrap items-start justify-center gap-x-2 gap-y-1.5 md:gap-x-3 md:gap-y-2 py-3 md:py-5 min-h-[50vh] px-2 md:px-4">
+    <div className="flex flex-wrap items-start content-start gap-x-1.5 gap-y-1 md:gap-x-2 md:gap-y-1.5 py-2 md:py-3 px-1 md:px-2">
       {shuffledContent.map((item, index) => {
         if (item.type === 'word') {
           const word = item.data as Word
