@@ -337,7 +337,7 @@ export default function Home() {
             const maxCount = counts.length ? Math.max(...counts) : 1
             const wordCloudWords = pickedTerms.map((w) => {
               const normalizedSize = maxCount > minCount ? (w.count - minCount) / (maxCount - minCount) : 0.5
-              const fontSize = 16 + normalizedSize * 40
+              const fontSize = 22 + normalizedSize * 45 // Bigger words for better visibility
               return { text: w.text, size: fontSize }
             })
 
