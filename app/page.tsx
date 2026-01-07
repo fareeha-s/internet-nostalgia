@@ -237,8 +237,8 @@ export default function Home() {
         )}
       </div>
 
-      {/* Scrollable Sections */}
-      <div className="pt-24 md:pt-32">
+      {/* Scrollable Sections - Continuous Flow */}
+      <div className="pt-24 md:pt-32 pb-32 max-w-7xl mx-auto">
         {timeline.map((date, index) => {
           const year = date.getFullYear()
           const month = date.getMonth()
@@ -261,7 +261,7 @@ export default function Home() {
                   }
                 }
               }}
-              className="min-h-screen flex flex-col items-center justify-center py-12 md:py-16 px-4 md:px-8 border-b border-white/5"
+              className="px-4 md:px-8"
             >
 
               {/* Lazy load content */}
@@ -311,16 +311,14 @@ export default function Home() {
                 })
 
                 return (
-                  <div className="w-full max-w-7xl">
-                    <FloatingWordCloud 
-                      words={wordCloudWords} 
-                      media={media}
-                      songs={songs}
-                      tweets={tweets}
-                      onVideoSelect={setSelectedVideo}
-                      key={`cloud-${year}-${month}-${randomSeed}`}
-                    />
-                  </div>
+                  <FloatingWordCloud 
+                    words={wordCloudWords} 
+                    media={media}
+                    songs={songs}
+                    tweets={tweets}
+                    onVideoSelect={setSelectedVideo}
+                    key={`cloud-${year}-${month}-${randomSeed}`}
+                  />
                 )
               })()}
             </section>
