@@ -51,14 +51,14 @@ type ContentItem =
 const GifImageThumbnail = memo(function GifImageThumbnail({ item }: { item: any }) {
   return (
     <div
-      className="relative w-14 h-14 sm:w-[72px] sm:h-[72px] md:w-24 md:h-24 rounded-lg overflow-hidden border border-white/20 active:border-white/40 md:hover:border-white/40 transition-all active:scale-95 md:hover:scale-105 flex-shrink-0 will-change-transform touch-manipulation"
+      className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-lg overflow-hidden border border-white/20 active:border-white/40 md:hover:border-white/40 transition-all active:scale-95 md:hover:scale-105 flex-shrink-0 will-change-transform touch-manipulation"
       title={item.title}
     >
       <NextImage
         src={item.url}
         alt={item.title}
         fill
-        sizes="(max-width: 640px) 56px, (max-width: 768px) 72px, 96px"
+        sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 160px, 192px"
         className="object-cover opacity-80"
       />
     </div>
@@ -83,7 +83,7 @@ const VideoThumbnail = memo(function VideoThumbnail({ item, onSelect }: { item: 
 
   return (
     <button
-      className="group relative w-16 h-11 sm:w-20 sm:h-14 md:w-28 md:h-20 rounded-lg overflow-hidden border border-white/20 active:border-white/40 md:hover:border-white/40 transition-all active:scale-95 md:hover:scale-105 flex-shrink-0 will-change-transform touch-manipulation"
+      className="group relative w-32 h-20 sm:w-40 sm:h-24 md:w-56 md:h-32 lg:w-64 lg:h-40 rounded-lg overflow-hidden border border-white/20 active:border-white/40 md:hover:border-white/40 transition-all active:scale-95 md:hover:scale-105 flex-shrink-0 will-change-transform touch-manipulation"
       onClick={() => onSelect?.(item.id)}
       title={item.title}
     >
@@ -91,12 +91,12 @@ const VideoThumbnail = memo(function VideoThumbnail({ item, onSelect }: { item: 
         src={`https://img.youtube.com/vi/${item.id}/mqdefault.jpg`}
         alt={item.title}
         fill
-        sizes="(max-width: 640px) 64px, (max-width: 768px) 80px, 112px"
+        sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, (max-width: 1024px) 224px, 256px"
         className="object-cover opacity-70"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white/80" fill="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white/80" fill="currentColor" viewBox="0 0 24 24">
           <path d="M8 5v14l11-7z"/>
         </svg>
       </div>
