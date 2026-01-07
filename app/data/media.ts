@@ -318,38 +318,33 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
   '2025-2026': [
     {
       type: 'youtube',
-      title: 'Wicked Official Trailer',
-      id: '6COmYeLsz4c',
+      title: 'APT. - ROSÉ & Bruno Mars',
+      id: 'ekr2nIex040',
     },
     {
       type: 'youtube',
-      title: 'Squid Game Season 2',
+      title: 'Die With A Smile - Lady Gaga, Bruno Mars',
+      id: 'kPa7bsKwL-c',
+    },
+    {
+      type: 'youtube',
+      title: 'Taylor Swift Eras Tour',
+      id: 'KudedLV0tP0',
+    },
+    {
+      type: 'youtube',
+      title: 'Squid Game Season 2 Trailer',
       id: 'Ed5QQOX0ByU',
     },
     {
       type: 'youtube',
-      title: 'Moo Deng Baby Hippo',
-      id: 'R7DhGLXp_6E',
+      title: 'Wicked - Defying Gravity',
+      id: '6COmYeLsz4c',
     },
     {
       type: 'youtube',
-      title: 'Very Demure Very Mindful',
-      id: 'wWHjV35mh6k',
-    },
-    {
-      type: 'youtube',
-      title: 'Hawk Tuah Interview',
-      id: 'oIkhyHPMcAg',
-    },
-    {
-      type: 'youtube',
-      title: 'Skibidi Toilet',
-      id: 'WIJmzvQWeTo',
-    },
-    {
-      type: 'youtube',
-      title: 'Mr Beast Squid Game',
-      id: '0e3GPea1Tyg',
+      title: 'Bad Bunny - Lo Que Le Pasó a Hawaii',
+      id: 'GzST0Vc7F7o',
     },
   ],
 }

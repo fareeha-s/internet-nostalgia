@@ -202,31 +202,25 @@ export const ERA_SONGS: Record<string, SongItem[]> = {
       title: 'APT.',
       artist: 'ROSÉ & Bruno Mars',
       spotifyId: '5vNRhkKd0yEAg8suGBpjeY',
-      memeContext: 'Viral drinking game song'
-    },
-    {
-      title: 'Defying Gravity',
-      artist: 'Cynthia Erivo, Ariana Grande',
-      spotifyId: '3V7UhEDGqIcxnP1SoUHLht',
-      memeContext: 'Wicked movie soundtrack'
+      memeContext: '#1 song 2025 - APT dance challenge'
     },
     {
       title: 'Die With A Smile',
       artist: 'Lady Gaga, Bruno Mars',
       spotifyId: '2plbrEY59IikOBgBGLjaoe',
-      memeContext: 'Late 2024 viral hit'
+      memeContext: 'Billboard #1 year-end 2025'
     },
     {
-      title: 'Espresso',
+      title: 'Lo Que Le Pasó a Hawaii',
+      artist: 'Bad Bunny',
+      spotifyId: '4tXoFoPn6p4TbIFdnDzjGh',
+      memeContext: 'Top song of 2025'
+    },
+    {
+      title: 'Such a Funny Way',
       artist: 'Sabrina Carpenter',
-      spotifyId: '2qSkIjg1o9h3YT9RAgYN75',
-      memeContext: 'That\'s that me espresso'
-    },
-    {
-      title: 'Birds of a Feather',
-      artist: 'Billie Eilish',
-      spotifyId: '6dOtVTDdiauQNBQEDOtlAB',
-      memeContext: 'Viral TikTok sound'
+      spotifyId: '1LD3xLmvRO6VGZv3ewDDul',
+      memeContext: 'Best song Dec 2025'
     },
   ],
 }
