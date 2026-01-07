@@ -18,11 +18,10 @@ export default function Home() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
   const [showSources, setShowSources] = useState(false)
   const [randomSeed] = useState(() => Math.random()) // Shuffle on page load
-  const [visibleSections, setVisibleSections] = useState<Set<number>>(new Set([0, 1, 2])) // Start with first 3 sections visible
+  const [loadedCount, setLoadedCount] = useState(1) // Only load 1 section initially
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
-  const observerRef = useRef<IntersectionObserver | null>(null)
+  const loadMoreRef = useRef<HTMLDivElement | null>(null)
   const yearObserverRef = useRef<IntersectionObserver | null>(null)
-  const sectionRefs = useRef<Map<number, HTMLElement>>(new Map())
 
   // Generate timeline: current month back to Jan 2000
   const timeline = useMemo(() => {
@@ -92,33 +91,27 @@ export default function Home() {
     return result
   }
 
-  // Set up intersection observer for lazy loading
+  // Set up intersection observer for loading more sections
   useEffect(() => {
-    observerRef.current = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = parseInt(entry.target.getAttribute('data-index') || '0')
-            setVisibleSections(prev => {
-              const newSet = new Set(prev)
-              newSet.add(index)
-              return newSet
-            })
-          }
-        })
+        if (entries[0].isIntersecting) {
+          // Load 3 more sections when user scrolls near the bottom
+          setLoadedCount(prev => Math.min(prev + 3, timeline.length))
+        }
       },
       {
-        rootMargin: '500px', // Load 500px before entering viewport
+        rootMargin: '800px', // Load more when 800px away from bottom
         threshold: 0
       }
     )
 
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect()
-      }
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current)
     }
-  }, [])
+
+    return () => observer.disconnect()
+  }, [timeline.length])
 
   // Set up intersection observer for year tracking
   useEffect(() => {
@@ -237,93 +230,78 @@ export default function Home() {
         )}
       </div>
 
-      {/* Scrollable Sections - Continuous Flow */}
+      {/* Scrollable Sections - Only render what's needed */}
       <div className="pt-24 md:pt-32 pb-32 max-w-7xl mx-auto">
-        {timeline.map((date, index) => {
+        {timeline.slice(0, loadedCount).map((date, index) => {
           const year = date.getFullYear()
           const month = date.getMonth()
           const era = getEra(year)
-          const isVisible = visibleSections.has(index)
+          
+          // Get data for this month
+          const result = getDataForMonth(year, month + 1)
+          const words = result.words || []
+          
+          // Get media, songs, tweets
+          const eraMedia = ERA_MEDIA[era] || []
+          const eraSongs = ERA_SONGS[era] || []
+          const eraTweets = ERA_TWEETS[era] || []
+          
+          // Get DIFFERENT slices for each month
+          const media = getContentSlice(eraMedia, index, 2)
+          const songs = getContentSlice(eraSongs, index + 100, 2)
+          const tweets = getContentSlice(eraTweets, index + 200, 2)
+          
+          // Rotate words - take different subset each month
+          const shuffledWords = shuffleArray(words, randomSeed)
+          const wordsPerMonth = Math.max(8, Math.ceil(words.length / 3))
+          const wordStartIdx = (index * 3) % Math.max(1, words.length)
+          const selectedWords: typeof words = []
+          for (let i = 0; i < Math.min(wordsPerMonth, words.length); i++) {
+            const idx = (wordStartIdx + i) % words.length
+            selectedWords.push(shuffledWords[idx])
+          }
+          
+          // Transform words for display
+          const wordCloudWords = selectedWords.map(w => {
+            const counts = selectedWords.map(word => word.count)
+            const minCount = Math.min(...counts)
+            const maxCount = Math.max(...counts)
+            const normalizedSize = maxCount > minCount
+              ? ((w.count - minCount) / (maxCount - minCount))
+              : 0.5
+            const fontSize = 16 + (normalizedSize * 40)
+            
+            return { text: w.text, size: fontSize }
+          })
 
           return (
             <section
               key={`${year}-${month}-${index}`}
-              data-index={index}
               data-year={year}
               ref={(el) => {
-                if (el) {
-                  sectionRefs.current.set(index, el)
-                  if (observerRef.current && !visibleSections.has(index)) {
-                    observerRef.current.observe(el)
-                  }
-                  if (yearObserverRef.current) {
-                    yearObserverRef.current.observe(el)
-                  }
+                if (el && yearObserverRef.current) {
+                  yearObserverRef.current.observe(el)
                 }
               }}
               className="px-4 md:px-8"
             >
-
-              {/* Lazy load content */}
-              {isVisible && (() => {
-                // Get data for this month
-                const result = getDataForMonth(year, month + 1)
-                const words = result.words || []
-                
-                // Get media, songs, tweets
-                const eraMedia = ERA_MEDIA[era] || []
-                const eraSongs = ERA_SONGS[era] || []
-                const eraTweets = ERA_TWEETS[era] || []
-                
-                // Calculate absolute month index (unique for each month in timeline)
-                // This ensures EVERY month gets different content
-                const absoluteMonthIndex = index
-                
-                // Get DIFFERENT slices for each month
-                // Media: 2 items per month (videos/gifs)
-                // Songs: 2 items per month
-                // Tweets: 2 items per month
-                const media = getContentSlice(eraMedia, absoluteMonthIndex, 2)
-                const songs = getContentSlice(eraSongs, absoluteMonthIndex + 100, 2)
-                const tweets = getContentSlice(eraTweets, absoluteMonthIndex + 200, 2)
-                
-                // Also rotate words - take different subset each month
-                const shuffledWords = shuffleArray(words, randomSeed)
-                const wordsPerMonth = Math.max(8, Math.ceil(words.length / 3))
-                const wordStartIdx = (absoluteMonthIndex * 3) % Math.max(1, words.length)
-                const selectedWords: typeof words = []
-                for (let i = 0; i < Math.min(wordsPerMonth, words.length); i++) {
-                  const idx = (wordStartIdx + i) % words.length
-                  selectedWords.push(shuffledWords[idx])
-                }
-                
-                // Transform words for display
-                const wordCloudWords = selectedWords.map(w => {
-                  const counts = selectedWords.map(word => word.count)
-                  const minCount = Math.min(...counts)
-                  const maxCount = Math.max(...counts)
-                  const normalizedSize = maxCount > minCount
-                    ? ((w.count - minCount) / (maxCount - minCount))
-                    : 0.5
-                  const fontSize = 16 + (normalizedSize * 40)
-                  
-                  return { text: w.text, size: fontSize }
-                })
-
-                return (
-                  <FloatingWordCloud 
-                    words={wordCloudWords} 
-                    media={media}
-                    songs={songs}
-                    tweets={tweets}
-                    onVideoSelect={setSelectedVideo}
-                    key={`cloud-${year}-${month}-${randomSeed}`}
-                  />
-                )
-              })()}
+              <FloatingWordCloud 
+                words={wordCloudWords} 
+                media={media}
+                songs={songs}
+                tweets={tweets}
+                onVideoSelect={setSelectedVideo}
+              />
             </section>
           )
         })}
+        
+        {/* Load more trigger */}
+        {loadedCount < timeline.length && (
+          <div ref={loadMoreRef} className="h-20 flex items-center justify-center">
+            <span className="text-white/20 text-sm">↓</span>
+          </div>
+        )}
       </div>
 
       {/* Media Gallery */}
