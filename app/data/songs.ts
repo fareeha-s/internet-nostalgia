@@ -37,22 +37,16 @@ export const ERA_SONGS: Record<string, SongItem[]> = {
       memeContext: 'Rickroll'
     },
     {
-      title: 'Chocolate Rain',
-      artist: 'Tay Zonday',
-      spotifyId: '1p1Z3ayzGhkdKlKPJPzJFS',
-      memeContext: 'Viral video song'
-    },
-    {
-      title: 'Dragostea Din Tei',
-      artist: 'O-Zone',
-      spotifyId: '02l43tcNi3hkXKCN0Ovvdj',
-      memeContext: 'Numa Numa'
-    },
-    {
       title: 'All Star',
       artist: 'Smash Mouth',
       spotifyId: '3cfOd4CMv2snFaKAnMdnvK',
       memeContext: 'Shrek meme'
+    },
+    {
+      title: 'Shoes',
+      artist: 'Liam Kyle Sullivan',
+      spotifyId: '4pNApHFIfhaDKXkfXU5z8H',
+      memeContext: 'Let me borrow that top'
     },
   ],
   

@@ -20,15 +20,7 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
     },
   ],
   
-  '2007-2009': [
-    {
-      text: 'just setting up my twttr',
-      author: 'Jack Dorsey',
-      handle: '@jack',
-      date: 'Mar 21, 2006',
-      context: 'First tweet ever'
-    },
-  ],
+  '2007-2009': [],
   
   '2010-2012': [
     {
