@@ -19,7 +19,10 @@ export default function Home() {
   const [showSources, setShowSources] = useState(false)
   const [randomSeed] = useState(() => Math.random()) // Shuffle on page load
   const [visibleSections, setVisibleSections] = useState<Set<number>>(new Set([0, 1, 2])) // Start with first 3 sections visible
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
   const observerRef = useRef<IntersectionObserver | null>(null)
+  const yearObserverRef = useRef<IntersectionObserver | null>(null)
+  const sectionRefs = useRef<Map<number, HTMLElement>>(new Map())
 
   // Generate timeline: current month back to Jan 2000
   const timeline = useMemo(() => {
@@ -125,16 +128,81 @@ export default function Home() {
     }
   }, [])
 
-  // Helper to check if year changed from previous section
-  const isYearTransition = (index: number): boolean => {
-    if (index === 0) return true
-    const currentYear = timeline[index].getFullYear()
-    const prevYear = timeline[index - 1].getFullYear()
-    return currentYear !== prevYear
-  }
+  // Set up intersection observer for year tracking
+  useEffect(() => {
+    yearObserverRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const year = parseInt(entry.target.getAttribute('data-year') || '2026')
+            setCurrentYear(year)
+          }
+        })
+      },
+      {
+        rootMargin: '-40% 0px -40% 0px', // Trigger when section is in middle 20% of viewport
+        threshold: 0
+      }
+    )
+
+    return () => {
+      if (yearObserverRef.current) {
+        yearObserverRef.current.disconnect()
+      }
+    }
+  }, [])
+
 
   return (
     <main className="relative bg-black">
+      {/* Year Dial - Apple Watch style */}
+      <div className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center">
+        {/* Dial Container */}
+        <div className="relative w-16 h-16 md:w-20 md:h-20">
+          {/* Outer Ring */}
+          <div className="absolute inset-0 rounded-full border-2 border-white/20 bg-black/80 backdrop-blur-xl" />
+          
+          {/* Tick Marks */}
+          <div className="absolute inset-0">
+            {[...Array(12)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-0.5 h-1.5 bg-white/30 left-1/2 -translate-x-1/2"
+                style={{
+                  top: '4px',
+                  transform: `translateX(-50%) rotate(${i * 30}deg)`,
+                  transformOrigin: 'center 28px',
+                }}
+              />
+            ))}
+          </div>
+          
+          {/* Year Display */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span 
+              className="text-lg md:text-xl font-light tracking-wider text-white/90 transition-all duration-300"
+              key={currentYear}
+            >
+              {currentYear}
+            </span>
+          </div>
+          
+          {/* Inner glow */}
+          <div className="absolute inset-2 rounded-full bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
+        </div>
+        
+        {/* Direction indicator */}
+        <div className="mt-3 flex flex-col items-center gap-1 text-white/30">
+          <svg className="w-3 h-3 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+          <span className="text-[8px] md:text-[10px] tracking-widest uppercase">scroll</span>
+          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </div>
+
       {/* Fixed Header */}
       <div className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 md:py-6 bg-black/90 backdrop-blur-lg border-b border-white/10">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -182,28 +250,26 @@ export default function Home() {
           const year = date.getFullYear()
           const month = date.getMonth()
           const era = getEra(year)
-          const showYearLabel = isYearTransition(index)
           const isVisible = visibleSections.has(index)
 
           return (
             <section
               key={`${year}-${month}-${index}`}
               data-index={index}
+              data-year={year}
               ref={(el) => {
-                if (el && observerRef.current && !visibleSections.has(index)) {
-                  observerRef.current.observe(el)
+                if (el) {
+                  sectionRefs.current.set(index, el)
+                  if (observerRef.current && !visibleSections.has(index)) {
+                    observerRef.current.observe(el)
+                  }
+                  if (yearObserverRef.current) {
+                    yearObserverRef.current.observe(el)
+                  }
                 }
               }}
               className="min-h-screen flex flex-col items-center justify-center py-12 md:py-16 px-4 md:px-8 border-b border-white/5"
             >
-              {/* Year Header - only show on year transitions */}
-              {showYearLabel && (
-                <div className="mb-8 text-center">
-                  <h2 className="text-3xl md:text-5xl font-light tracking-wider text-white/90">
-                    {format(date, 'yyyy')}
-                  </h2>
-                </div>
-              )}
 
               {/* Lazy load content */}
               {isVisible && (() => {
