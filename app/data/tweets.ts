@@ -52,20 +52,6 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
       date: '2011',
       context: 'YOLO origin'
     },
-    {
-      text: 'I\'m on a boat',
-      author: 'The Lonely Island',
-      handle: '@thelonelyisland',
-      date: '2009',
-      context: 'SNL viral'
-    },
-    {
-      text: 'Hashtag',
-      author: 'Jimmy Fallon',
-      handle: '@jimmyfallon',
-      date: '2012',
-      context: 'Hashtag sketch'
-    },
   ],
   
   '2013-2015': [
@@ -82,34 +68,6 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
       handle: '@dril',
       date: '2014',
       context: 'Classic dril'
-    },
-    {
-      text: 'The dress is blue and black',
-      author: 'Taylor Swift',
-      handle: '@taylorswift13',
-      date: 'Feb 2015',
-      context: 'The dress debate'
-    },
-    {
-      text: 'Damn Daniel',
-      author: 'Josh Holz',
-      handle: '@joshholz',
-      date: '2016',
-      context: 'Damn Daniel meme'
-    },
-    {
-      text: 'What does the fox say?',
-      author: 'Ylvis',
-      handle: '@ylvis',
-      date: '2013',
-      context: 'Viral song'
-    },
-    {
-      text: 'Can\'t believe it\'s not butter',
-      author: 'Chrissy Teigen',
-      handle: '@chrissyteigen',
-      date: '2014',
-      context: 'Random tweet'
     },
   ],
   
@@ -135,20 +93,6 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
       date: '2018',
       context: 'Song release'
     },
-    {
-      text: 'Gucci Gang Gucci Gang Gucci Gang',
-      author: 'Lil Pump',
-      handle: '@lilpump',
-      date: '2017',
-      context: 'Viral song'
-    },
-    {
-      text: 'Kiki do you love me',
-      author: 'Drake',
-      handle: '@drake',
-      date: '2018',
-      context: 'In my feelings challenge'
-    },
   ],
   
   '2019-2021': [
@@ -160,39 +104,11 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
       context: 'Bernie meme'
     },
     {
-      text: 'sus',
-      author: 'Among Us',
-      handle: '@AmongUsGame',
-      date: '2020',
-      context: 'Among Us explosion'
-    },
-    {
-      text: 'Wellerman sea shanty',
-      author: 'Nathan Evans',
-      handle: '@nathanevanss',
-      date: '2021',
-      context: 'TikTok viral'
-    },
-    {
-      text: 'Old Town Road',
+      text: 'happy new year! here\'s to a great 2019',
       author: 'Lil Nas X',
       handle: '@LilNasX',
-      date: '2019',
-      context: 'TikTok sensation'
-    },
-    {
-      text: 'Say So',
-      author: 'Doja Cat',
-      handle: '@DojaCat',
-      date: '2020',
-      context: 'TikTok dance'
-    },
-    {
-      text: 'Savage',
-      author: 'Megan Thee Stallion',
-      handle: '@theestallion',
-      date: '2020',
-      context: 'Savage challenge'
+      date: 'Jan 2019',
+      context: 'Before Old Town Road blew up'
     },
   ],
   
@@ -219,27 +135,6 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
       context: 'That\'s that me espresso'
     },
     {
-      text: 'Wednesday dance',
-      author: 'Jenna Ortega',
-      handle: '@jennaortega',
-      date: '2022',
-      context: 'Wednesday show'
-    },
-    {
-      text: 'It\'s giving',
-      author: 'Various',
-      handle: '@twitter',
-      date: '2022',
-      context: 'Meme phrase'
-    },
-    {
-      text: 'She ate',
-      author: 'Various',
-      handle: '@twitter',
-      date: '2022',
-      context: 'Slay variant'
-    },
-    {
       text: 'Rizz',
       author: 'Kai Cenat',
       handle: '@KaiCenat',
@@ -250,32 +145,11 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
   
   '2025-2026': [
     {
-      text: 'The great meme reset',
-      author: 'Various',
-      handle: '@twitter',
-      date: 'Jan 2026',
-      context: 'Meme reset 2026'
-    },
-    {
-      text: 'Big chungus returns',
-      author: 'Various',
-      handle: '@twitter',
-      date: 'Jan 2026',
-      context: 'Meme comeback'
-    },
-    {
-      text: '1/1/1',
-      author: 'Various',
-      handle: '@twitter',
-      date: 'Jan 2026',
-      context: 'Calendar meme'
-    },
-    {
-      text: 'APT dance',
+      text: 'APT.',
       author: 'ROSÉ',
       handle: '@roses_are_rosie',
       date: '2025',
-      context: 'Dance challenge'
+      context: 'APT dance challenge'
     },
   ],
 }
