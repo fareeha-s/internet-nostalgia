@@ -10,26 +10,26 @@ export const ERA_SONGS: Record<string, SongItem[]> = {
     {
       title: 'Never Gonna Give You Up',
       artist: 'Rick Astley',
-      spotifyId: '4PTG3Z6ehGkBFwjybzWkR8',
+      spotifyId: '4cOdK2wGLETKBW3PvgPWqT',
       memeContext: 'Rickroll'
     },
     {
       title: 'Chocolate Rain',
       artist: 'Tay Zonday',
-      spotifyId: '6m3kBaVlvRXiUrYLvJKjYL',
+      spotifyId: '1p1Z3ayzGhkdKlKPJPzJFS',
       memeContext: 'Viral video song'
     },
     {
       title: 'Dragostea Din Tei',
       artist: 'O-Zone',
-      spotifyId: '4H7QKIftC7OlQyjHjKxqWi',
+      spotifyId: '02l43tcNi3hkXKCN0Ovvdj',
       memeContext: 'Numa Numa'
     },
     {
-      title: 'Caramelldansen',
-      artist: 'Caramell',
-      spotifyId: '5DPRNoDfZKB3Vqg0bmRBPd',
-      memeContext: 'Dance meme'
+      title: 'All Star',
+      artist: 'Smash Mouth',
+      spotifyId: '3cfOd4CMv2snFaKAnMdnvK',
+      memeContext: 'Shrek meme'
     },
   ],
   
@@ -74,10 +74,10 @@ export const ERA_SONGS: Record<string, SongItem[]> = {
       memeContext: 'Party anthem'
     },
     {
-      title: 'Watch Me (Whip / Nae Nae)',
-      artist: 'Silentó',
-      spotifyId: '1A2GTWGtFfWp7KSQTwWOyo',
-      memeContext: 'Viral dance'
+      title: 'Uptown Funk',
+      artist: 'Mark Ronson, Bruno Mars',
+      spotifyId: '32OlwWuMpZ6b0aN2RZOeMS',
+      memeContext: 'Dance everywhere'
     },
     {
       title: 'Hotline Bling',
@@ -118,13 +118,13 @@ export const ERA_SONGS: Record<string, SongItem[]> = {
     {
       title: 'Old Town Road',
       artist: 'Lil Nas X',
-      spotifyId: '2YpeDb67231RjR0MgVLzsG',
+      spotifyId: '6u7jPi22kF8CTQ3rb9zqF1',
       memeContext: 'TikTok sensation'
     },
     {
       title: 'Savage Love',
       artist: 'Jawsh 685, Jason Derulo',
-      spotifyId: '1xQ6trAsedVPCdbtDAmk0c',
+      spotifyId: '0eG08cBeKk0mzykKjw4hcQ',
       memeContext: 'TikTok dance'
     },
     {
@@ -151,19 +151,19 @@ export const ERA_SONGS: Record<string, SongItem[]> = {
     {
       title: 'As It Was',
       artist: 'Harry Styles',
-      spotifyId: '4Dvkj6JhhA12EX05fT7y2e',
+      spotifyId: '1vYXt7VSjH9JIM5oGRTfrz',
       memeContext: 'Massive hit'
     },
     {
       title: 'Cupid - Twin Ver.',
       artist: 'FIFTY FIFTY',
-      spotifyId: '1wKqVlTE3Uod7X1SfTHIJU',
+      spotifyId: '4e1aewX6ATPcdfQIqr7gqO',
       memeContext: 'TikTok viral'
     },
     {
       title: 'Boy\'s a liar Pt. 2',
       artist: 'PinkPantheress, Ice Spice',
-      spotifyId: '5s9XwghtKwl73G0pBTC1MW',
+      spotifyId: '1VYk8wwMXRUmMAlVbzS56C',
       memeContext: 'Ice Spice era'
     },
   ],
@@ -172,7 +172,7 @@ export const ERA_SONGS: Record<string, SongItem[]> = {
     {
       title: '360',
       artist: 'Charli XCX',
-      spotifyId: '4w2GLmK2wnioVbg7myYiNL',
+      spotifyId: '4w3tQBXhn5345eUXDGBWZG',
       memeContext: 'Brat summer'
     },
     {
