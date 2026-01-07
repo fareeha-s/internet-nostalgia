@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useState, useEffect, useMemo, useCallback, memo } from 'react'
+import NextImage from 'next/image'
 
 interface Word {
   text: string
@@ -50,14 +51,15 @@ type ContentItem =
 const GifImageThumbnail = memo(function GifImageThumbnail({ item }: { item: any }) {
   return (
     <div
-      className="relative w-14 h-14 sm:w-18 sm:h-18 md:w-24 md:h-24 rounded-lg overflow-hidden border border-white/20 active:border-white/40 md:hover:border-white/40 transition-all active:scale-95 md:hover:scale-105 flex-shrink-0 will-change-transform touch-manipulation"
+      className="relative w-14 h-14 sm:w-[72px] sm:h-[72px] md:w-24 md:h-24 rounded-lg overflow-hidden border border-white/20 active:border-white/40 md:hover:border-white/40 transition-all active:scale-95 md:hover:scale-105 flex-shrink-0 will-change-transform touch-manipulation"
       title={item.title}
     >
-      <img
+      <NextImage
         src={item.url}
         alt={item.title}
-        loading="lazy"
-        className="w-full h-full object-cover opacity-80"
+        fill
+        sizes="(max-width: 640px) 56px, (max-width: 768px) 72px, 96px"
+        className="object-cover opacity-80"
       />
     </div>
   )
@@ -68,7 +70,7 @@ const VideoThumbnail = memo(function VideoThumbnail({ item, onSelect }: { item: 
   const [isAvailable, setIsAvailable] = useState(false)
   
   useEffect(() => {
-    const img = new Image()
+    const img = new window.Image()
     img.onload = () => {
       if (img.naturalWidth > 120 && img.naturalHeight > 90) {
         setIsAvailable(true)
@@ -85,11 +87,12 @@ const VideoThumbnail = memo(function VideoThumbnail({ item, onSelect }: { item: 
       onClick={() => onSelect?.(item.id)}
       title={item.title}
     >
-      <img
+      <NextImage
         src={`https://img.youtube.com/vi/${item.id}/mqdefault.jpg`}
         alt={item.title}
-        loading="lazy"
-        className="w-full h-full object-cover opacity-70"
+        fill
+        sizes="(max-width: 640px) 64px, (max-width: 768px) 80px, 112px"
+        className="object-cover opacity-70"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">

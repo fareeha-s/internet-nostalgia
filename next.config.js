@@ -6,6 +6,7 @@ const nextConfig = {
   assetPrefix: process.env.NODE_ENV === 'production' ? '/internet-nostalgia' : '',
   images: {
     unoptimized: true,
+    domains: ['img.youtube.com', 'media.giphy.com', 'i.imgur.com'],
   },
 }
 
