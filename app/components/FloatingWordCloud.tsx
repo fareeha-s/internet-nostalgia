@@ -1,7 +1,6 @@
 'use client'
 
 import { useRef, useState, useEffect, useMemo } from 'react'
-import { toPng } from 'html-to-image'
 
 interface Word {
   text: string
@@ -180,7 +179,6 @@ function TweetCard({ tweet }: { tweet: Tweet }) {
 
 export default function FloatingWordCloud({ words, media = [], songs = [], tweets = [], onVideoSelect }: FloatingWordCloudProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [isGenerating, setIsGenerating] = useState(false)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const wordRefs = useRef<Map<number, HTMLSpanElement>>(new Map())
 
@@ -263,39 +261,12 @@ export default function FloatingWordCloud({ words, media = [], songs = [], tweet
     updateWordPositions()
   }, [mousePos])
 
-  const handleDownload = async () => {
-    if (!containerRef.current) return
-    setIsGenerating(true)
-    try {
-      const dataUrl = await toPng(containerRef.current, {
-        backgroundColor: '#000000',
-        pixelRatio: 2,
-      })
-      const link = document.createElement('a')
-      link.download = 'internet-nostalgia.png'
-      link.href = dataUrl
-      link.click()
-    } catch (err) {
-      console.error('Error generating image:', err)
-    } finally {
-      setIsGenerating(false)
-    }
-  }
-
   if (words.length === 0) {
     return null
   }
 
   return (
     <div className="relative w-full h-full">
-      <button
-        onClick={handleDownload}
-        disabled={isGenerating}
-        className="absolute top-2 right-2 md:top-4 md:right-4 z-20 px-2 py-1 md:px-3 md:py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 hover:text-white text-xs font-medium rounded-full backdrop-blur-xl transition-all duration-300"
-      >
-        {isGenerating ? 'Saving...' : '↓'}
-      </button>
-      
       <div
         ref={containerRef}
         className="relative w-full h-full bg-black"

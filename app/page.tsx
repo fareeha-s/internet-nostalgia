@@ -247,11 +247,6 @@ export default function Home() {
               <p className="text-xs md:text-sm text-white/70 tracking-wide font-light mb-1">
                 {format(currentDate, 'MMMM yyyy')}
               </p>
-              {data.length > 0 && (
-                <p className="text-[10px] md:text-xs text-white/30 font-light">
-                  {data.length} terms {getMemeCount > 0 && `• ${getMemeCount} marked`}
-                </p>
-              )}
             </div>
           </div>
 
