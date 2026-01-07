@@ -318,33 +318,33 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
   '2025-2026': [
     {
       type: 'youtube',
+      title: 'Big Chungus Returns',
+      id: 'cB4dYfFgaME',
+    },
+    {
+      type: 'youtube',
+      title: 'Ugandan Knuckles Original',
+      id: 'Hxjofn2bYE8',
+    },
+    {
+      type: 'youtube',
+      title: 'Nyan Cat 10 Hours',
+      id: 'QH2-TGUlwu4',
+    },
+    {
+      type: 'youtube',
       title: 'APT. - ROSÉ & Bruno Mars',
       id: 'ekr2nIex040',
     },
     {
       type: 'youtube',
-      title: 'Die With A Smile - Lady Gaga, Bruno Mars',
-      id: 'kPa7bsKwL-c',
-    },
-    {
-      type: 'youtube',
-      title: 'Taylor Swift Eras Tour',
-      id: 'KudedLV0tP0',
-    },
-    {
-      type: 'youtube',
-      title: 'Squid Game Season 2 Trailer',
+      title: 'Squid Game Season 2',
       id: 'Ed5QQOX0ByU',
     },
     {
       type: 'youtube',
-      title: 'Wicked - Defying Gravity',
-      id: '6COmYeLsz4c',
-    },
-    {
-      type: 'youtube',
-      title: 'Bad Bunny - Lo Que Le Pasó a Hawaii',
-      id: 'GzST0Vc7F7o',
+      title: 'Italian Brainrot Compilation',
+      id: 'XqZsoesa55w',
     },
   ],
 }

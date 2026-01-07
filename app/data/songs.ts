@@ -199,10 +199,16 @@ export const ERA_SONGS: Record<string, SongItem[]> = {
   
   '2025-2026': [
     {
+      title: 'CHANEL',
+      artist: 'Tyla',
+      spotifyId: '55h7vJchibLdUkxdlX3fK7',
+      memeContext: '#1 Pop song Jan 2026'
+    },
+    {
       title: 'APT.',
       artist: 'ROSÉ & Bruno Mars',
       spotifyId: '5vNRhkKd0yEAg8suGBpjeY',
-      memeContext: '#1 song 2025 - APT dance challenge'
+      memeContext: 'APT dance challenge'
     },
     {
       title: 'Die With A Smile',
@@ -211,16 +217,10 @@ export const ERA_SONGS: Record<string, SongItem[]> = {
       memeContext: 'Billboard #1 year-end 2025'
     },
     {
-      title: 'Lo Que Le Pasó a Hawaii',
-      artist: 'Bad Bunny',
-      spotifyId: '4tXoFoPn6p4TbIFdnDzjGh',
-      memeContext: 'Top song of 2025'
-    },
-    {
-      title: 'Such a Funny Way',
-      artist: 'Sabrina Carpenter',
-      spotifyId: '1LD3xLmvRO6VGZv3ewDDul',
-      memeContext: 'Best song Dec 2025'
+      title: 'Man I Need',
+      artist: 'Olivia Dean',
+      spotifyId: '0y8y1zDbpYCQ5bveSzihaj',
+      memeContext: 'Top 40 Pop #2'
     },
   ],
 }
