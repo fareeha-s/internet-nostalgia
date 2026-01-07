@@ -290,29 +290,22 @@ export default function Home() {
       {/* Horizontal Scroll Container */}
       <div 
         ref={scrollContainerRef}
-        className="flex-1 overflow-x-auto overflow-y-hidden pt-24 md:pt-32 pb-24 md:pb-28"
+        className="flex-1 overflow-x-auto overflow-y-auto pt-20 md:pt-24 pb-20 md:pb-24"
         style={{ 
           scrollBehavior: 'smooth',
           WebkitOverflowScrolling: 'touch',
         }}
       >
         <div 
-          className={`flex h-full transition-opacity duration-1000 ${isMounted ? 'opacity-100' : 'opacity-0'}`}
-          style={{ minHeight: 'calc(100vh - 180px)' }}
+          className={`flex transition-opacity duration-1000 ${isMounted ? 'opacity-100' : 'opacity-0'}`}
+          style={{ minHeight: 'calc(100vh - 160px)' }}
         >
           {yearData.map((data, index) => (
             <section
               key={data.year}
               data-year={data.year}
-              className="flex-shrink-0 w-screen md:w-[80vw] lg:w-[70vw] px-4 md:px-8 flex flex-col justify-center"
+              className="flex-shrink-0 w-screen md:w-[85vw] lg:w-[75vw] px-4 md:px-8 py-4"
             >
-              {/* Year label */}
-              <div className="text-center mb-4 md:mb-6">
-                <span className="text-4xl md:text-6xl font-extralight text-white/20 tracking-widest">
-                  {data.year}
-                </span>
-              </div>
-              
               <FloatingWordCloud
                 words={data.wordCloudWords}
                 media={data.media}
@@ -324,7 +317,7 @@ export default function Home() {
           ))}
 
           {/* End marker */}
-          <div className="flex-shrink-0 w-screen md:w-[50vw] flex items-center justify-center px-8">
+          <div className="flex-shrink-0 w-screen md:w-[40vw] flex items-center justify-center px-8">
             <div className="text-center space-y-4">
               <h2 className="text-3xl md:text-5xl font-light text-white/80 tracking-wide">
                 2000
@@ -343,53 +336,48 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Bottom Year Dial */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 px-4 md:px-8 py-4 md:py-6 bg-black/90 backdrop-blur-lg border-t border-white/10">
-        <div className="max-w-4xl mx-auto">
-          {/* Year indicator above dial */}
-          <div className="text-center mb-2">
-            <span className="text-2xl md:text-3xl font-light text-white tracking-wider">
-              {currentYear}
-            </span>
-          </div>
+      {/* Bottom Year Dial - Minimal */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 px-4 md:px-8 py-3 md:py-4 bg-black/80 backdrop-blur-sm">
+        <div className="max-w-3xl mx-auto flex items-center gap-4">
+          {/* Current year */}
+          <span className="text-xl md:text-2xl font-light text-white tracking-wider min-w-[60px]">
+            {currentYear}
+          </span>
           
-          {/* Horizontal Dial */}
+          {/* Horizontal Dial - Minimal */}
           <div 
             ref={dialRef}
-            className="relative h-8 md:h-10 bg-white/5 rounded-full border border-white/10 cursor-grab active:cursor-grabbing touch-none select-none overflow-hidden"
+            className="relative flex-1 h-6 md:h-8 cursor-grab active:cursor-grabbing touch-none select-none"
             onMouseDown={handleDialMouseDown}
             onTouchStart={handleDialTouchStart}
           >
-            {/* Year markers */}
-            <div className="absolute inset-0 flex items-center justify-between px-4 md:px-6">
-              <span className="text-xs md:text-sm text-white/40">{new Date().getFullYear()}</span>
-              <span className="text-xs md:text-sm text-white/40">2000</span>
-            </div>
+            {/* Track line */}
+            <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-px bg-white/20" />
             
             {/* Current position indicator */}
             <div 
-              className="absolute top-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 bg-white rounded-full shadow-lg transition-all duration-150"
+              className="absolute top-1/2 w-2 h-2 md:w-3 md:h-3 bg-white rounded-full transition-all duration-150"
               style={{
                 left: `${((new Date().getFullYear() - currentYear) / (new Date().getFullYear() - 2000)) * 100}%`,
                 transform: 'translate(-50%, -50%)',
               }}
             />
             
-            {/* Tick marks */}
-            <div className="absolute inset-0 flex items-center justify-between px-2">
-              {Array.from({ length: 27 }).map((_, i) => (
+            {/* Subtle tick marks */}
+            <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between">
+              {Array.from({ length: 14 }).map((_, i) => (
                 <div 
                   key={i} 
-                  className={`w-px ${i % 5 === 0 ? 'h-4 bg-white/30' : 'h-2 bg-white/15'}`}
+                  className="w-px h-2 bg-white/10"
                 />
               ))}
             </div>
           </div>
           
-          {/* Drag hint */}
-          <p className="text-center mt-2 text-[10px] md:text-xs text-white/30">
-            drag to jump to a year
-          </p>
+          {/* End year */}
+          <span className="text-sm md:text-base font-light text-white/40 min-w-[40px] text-right">
+            2000
+          </span>
         </div>
       </div>
 
