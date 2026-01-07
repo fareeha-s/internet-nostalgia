@@ -338,13 +338,43 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Squid Game Season 2',
+      title: 'Squid Game Season 2 Trailer',
       id: 'Ed5QQOX0ByU',
     },
     {
       type: 'youtube',
       title: 'Italian Brainrot Compilation',
       id: 'XqZsoesa55w',
+    },
+    {
+      type: 'youtube',
+      title: 'Wicked Movie Official',
+      id: '6COmYeLsz4c',
+    },
+    {
+      type: 'youtube',
+      title: 'Die With A Smile MV',
+      id: 'kPa7bsKwL-c',
+    },
+    {
+      type: 'youtube',
+      title: 'Moana 2 Trailer',
+      id: 'hDZ7y8RP5HE',
+    },
+    {
+      type: 'youtube',
+      title: 'Mr Beast Squid Game',
+      id: '0e3GPea1Tyg',
+    },
+    {
+      type: 'youtube',
+      title: 'Moo Deng Baby Hippo',
+      id: 'R7DhGLXp_6E',
+    },
+    {
+      type: 'youtube',
+      title: 'Very Demure Very Mindful',
+      id: 'wWHjV35mh6k',
     },
   ],
 }

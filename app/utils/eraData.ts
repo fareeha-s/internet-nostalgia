@@ -152,7 +152,7 @@ const ERA_TERMS: Record<string, { text: string; count: number }[]> = {
     { text: 'ick', count: 46 },
   ],
   
-  // 2025-2026: FRESH from web - phrases only, no song names
+  // 2025-2026: FRESH from web - EXPANDED for variety across months
   '2025-2026': [
     { text: 'the great meme reset', count: 100 },
     { text: 'big chungus returns', count: 98 },
@@ -164,11 +164,26 @@ const ERA_TERMS: Record<string, { text: string; count: number }[]> = {
     { text: 'nyan cat comeback', count: 78 },
     { text: 'brain rot era', count: 75 },
     { text: 'she ate no crumbs', count: 72 },
-    { text: 'its giving', count: 68 },
-    { text: 'understood the assignment', count: 65 },
-    { text: 'very demure very mindful', count: 62 },
-    { text: 'no crumbs left', count: 58 },
-    { text: 'the serve', count: 55 },
+    { text: 'its giving', count: 70 },
+    { text: 'understood the assignment', count: 68 },
+    { text: 'very demure very mindful', count: 66 },
+    { text: 'no crumbs left', count: 64 },
+    { text: 'the serve', count: 62 },
+    { text: 'mother is mothering', count: 60 },
+    { text: 'gagged', count: 58 },
+    { text: 'rent free', count: 56 },
+    { text: 'living in my head', count: 54 },
+    { text: 'im screaming', count: 52 },
+    { text: 'not me', count: 50 },
+    { text: 'the way i', count: 48 },
+    { text: 'please be serious', count: 46 },
+    { text: 'real ones know', count: 44 },
+    { text: 'periodt', count: 42 },
+    { text: 'chat is this real', count: 40 },
+    { text: 'nobody asked', count: 38 },
+    { text: 'caught in 4k', count: 36 },
+    { text: 'main character energy', count: 34 },
+    { text: 'villain era', count: 32 },
   ],
 }
 

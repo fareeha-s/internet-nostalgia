@@ -222,6 +222,30 @@ export const ERA_SONGS: Record<string, SongItem[]> = {
       spotifyId: '0y8y1zDbpYCQ5bveSzihaj',
       memeContext: 'Top 40 Pop #2'
     },
+    {
+      title: 'Defying Gravity',
+      artist: 'Cynthia Erivo, Ariana Grande',
+      spotifyId: '3V7UhEDGqIcxnP1SoUHLht',
+      memeContext: 'Wicked movie soundtrack'
+    },
+    {
+      title: 'Espresso',
+      artist: 'Sabrina Carpenter',
+      spotifyId: '2qSkIjg1o9h3YT9RAgYN75',
+      memeContext: 'That\'s that me espresso'
+    },
+    {
+      title: 'Birds of a Feather',
+      artist: 'Billie Eilish',
+      spotifyId: '6dOtVTDdiauQNBQEDOtlAB',
+      memeContext: 'Viral TikTok sound'
+    },
+    {
+      title: 'Lose Control',
+      artist: 'Teddy Swims',
+      spotifyId: '6usohdchdzW9oML7VC4Uhk',
+      memeContext: 'TikTok viral 2024-25'
+    },
   ],
 }
 
