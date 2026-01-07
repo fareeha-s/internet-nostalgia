@@ -17,7 +17,7 @@ export default function Home() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
   const [showSources, setShowSources] = useState(false)
   const [randomSeed, setRandomSeed] = useState(0) // Initialize with 0, set on client
-  const [loadedCount, setLoadedCount] = useState(10) // Load 10 sections initially for smoother start
+  const [loadedCount, setLoadedCount] = useState(15) // Load 15 sections initially for smoother start
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
   const [isMounted, setIsMounted] = useState(false)
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
@@ -113,12 +113,12 @@ export default function Home() {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && loadedCount < timeline.length) {
-          // Load 5 more sections when user scrolls near the bottom
-          setLoadedCount(prev => Math.min(prev + 5, timeline.length))
+          // Load 8 more sections when user scrolls near the bottom (faster loading)
+          setLoadedCount(prev => Math.min(prev + 8, timeline.length))
         }
       },
       {
-        rootMargin: '1000px', // Load more when 1000px away from bottom
+        rootMargin: '1500px', // Load more when 1500px away from bottom
         threshold: 0
       }
     )
@@ -390,6 +390,36 @@ export default function Home() {
         {loadedCount < timeline.length && (
           <div ref={loadMoreRef} className="h-20 flex items-center justify-center">
             <span className="text-white/20 text-sm">↓</span>
+          </div>
+        )}
+
+        {/* End of timeline - nice footer */}
+        {loadedCount >= timeline.length && (
+          <div className="flex flex-col items-center justify-center py-20 md:py-32 px-4 text-center animate-fade-in">
+            <div className="max-w-2xl space-y-6">
+              <h2 className="text-3xl md:text-5xl font-light text-white/90 tracking-wide">
+                The Beginning
+              </h2>
+              <p className="text-base md:text-xl text-white/60 font-light leading-relaxed">
+                You&apos;ve scrolled through <span className="text-white/80">25+ years</span> of internet culture,
+                from memes to moments that defined how we communicate online.
+              </p>
+              <p className="text-sm md:text-base text-white/40 font-light">
+                The internet started here, in 2000, with simple forums, Flash animations, and dial-up connections.
+                Now look how far we&apos;ve come.
+              </p>
+              <div className="pt-8 space-y-4">
+                <button
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className="text-white/60 hover:text-white transition-colors underline text-sm md:text-base"
+                >
+                  ↑ Back to {new Date().getFullYear()}
+                </button>
+                <div className="text-xs md:text-sm text-white/30">
+                  Made with ✨ by <a href="https://fareeha.sh" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/50 transition-colors">fareeha</a>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
