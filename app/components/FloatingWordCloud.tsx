@@ -58,6 +58,59 @@ function VideoThumbnail({ item, onSelect }: { item: any, onSelect?: (id: string)
 export default function FloatingWordCloud({ words, media = [], onVideoSelect }: FloatingWordCloudProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isGenerating, setIsGenerating] = useState(false)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const wordRefs = useRef<Map<number, HTMLSpanElement>>(new Map())
+
+  // Track mouse position
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect()
+        setMousePos({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        })
+      }
+    }
+
+    const container = containerRef.current
+    if (container) {
+      container.addEventListener('mousemove', handleMouseMove)
+      return () => container.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [])
+
+  // Apply repulsion effect to words
+  useEffect(() => {
+    const updateWordPositions = () => {
+      wordRefs.current.forEach((element, index) => {
+        if (!element || !containerRef.current) return
+        
+        const rect = element.getBoundingClientRect()
+        const containerRect = containerRef.current.getBoundingClientRect()
+        
+        const wordCenterX = rect.left + rect.width / 2 - containerRect.left
+        const wordCenterY = rect.top + rect.height / 2 - containerRect.top
+        
+        const dx = mousePos.x - wordCenterX
+        const dy = mousePos.y - wordCenterY
+        const distance = Math.sqrt(dx * dx + dy * dy)
+        const repelRadius = 120
+        
+        if (distance < repelRadius && distance > 0) {
+          const force = (repelRadius - distance) / repelRadius
+          const pushX = (-dx / distance) * force * 30
+          const pushY = (-dy / distance) * force * 30
+          
+          element.style.transform = `translate(${pushX}px, ${pushY}px)`
+        } else {
+          element.style.transform = ''
+        }
+      })
+    }
+
+    updateWordPositions()
+  }, [mousePos])
 
   const handleDownload = async () => {
     if (!containerRef.current) return
@@ -110,7 +163,8 @@ export default function FloatingWordCloud({ words, media = [], onVideoSelect }: 
         {/* Words and Media interspersed */}
         <div className="relative z-10 flex flex-wrap items-center justify-center gap-3 md:gap-5 p-4 md:p-8 h-full content-center">
           {sortedWords.map((word, index) => {
-            const baseFontSize = Math.max(16, Math.min(word.size * 0.8, 72))
+            // Use the size directly - it's already calculated based on importance
+            const baseFontSize = word.size
             
             // Insert a video after every 3-4 words
             const mediaIndex = Math.floor(index / 4)
@@ -126,7 +180,10 @@ export default function FloatingWordCloud({ words, media = [], onVideoSelect }: 
                   />
                 )}
                 <span
-                  className="floating-word font-light tracking-wide text-white/50 hover:text-white transition-all duration-300 cursor-default select-none"
+                  ref={(el) => {
+                    if (el) wordRefs.current.set(index, el)
+                  }}
+                  className="floating-word font-light tracking-wide text-white/50 hover:text-white transition-all duration-200 cursor-default select-none"
                   style={{
                     fontSize: `${baseFontSize}px`,
                     animationDelay: `${index * 0.1}s`,

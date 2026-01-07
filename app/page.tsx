@@ -120,11 +120,29 @@ export default function Home() {
   }
 
   const wordCloudWords = useMemo(
-    () =>
-      data.map((word) => ({
-        text: word.text,
-        size: Math.max(20, Math.min(word.count * 3, 120)),
-      })),
+    () => {
+      if (data.length === 0) return []
+      
+      // Find min and max counts for normalization
+      const counts = data.map(w => w.count)
+      const minCount = Math.min(...counts)
+      const maxCount = Math.max(...counts)
+      const range = maxCount - minCount || 1
+      
+      return data.map((word) => {
+        // Normalize count to 0-1 range
+        const normalized = (word.count - minCount) / range
+        // Use exponential scaling for more dramatic size differences
+        const scale = Math.pow(normalized, 0.6) // 0.6 makes it less extreme
+        // Map to size range: 14px (small) to 96px (large)
+        const size = 14 + (scale * 82)
+        
+        return {
+          text: word.text,
+          size: Math.round(size),
+        }
+      })
+    },
     [data]
   )
 
