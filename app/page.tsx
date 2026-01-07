@@ -188,10 +188,10 @@ export default function Home() {
           <div className="flex items-start justify-between mb-4 md:mb-6 gap-4">
             <div className="space-y-2">
               <h1 className="text-lg md:text-2xl font-light tracking-[0.2em] md:tracking-[0.3em] text-white/90">
-                ERALEXICON
+                INTERNET NOSTALGIA
               </h1>
               <p className="text-xs md:text-sm text-white/60 max-w-2xl">
-                words that defined each month. scroll through internet culture by era.
+                words, videos, and songs that defined each era. scroll through time.
               </p>
               <button
                 className="text-[11px] md:text-xs text-white/60 underline hover:text-white transition"

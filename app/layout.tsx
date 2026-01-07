@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Eralexicon',
-  description: 'Internet Culture Analysis',
+  title: 'Internet Nostalgia',
+  description: 'Words, videos, and songs that defined each era of internet culture',
 }
 
 export default function RootLayout({

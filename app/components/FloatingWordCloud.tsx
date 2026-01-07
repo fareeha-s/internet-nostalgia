@@ -165,7 +165,7 @@ export default function FloatingWordCloud({ words, media = [], songs = [], onVid
         pixelRatio: 2,
       })
       const link = document.createElement('a')
-      link.download = 'eralexicon.png'
+      link.download = 'internet-nostalgia.png'
       link.href = dataUrl
       link.click()
     } catch (err) {
