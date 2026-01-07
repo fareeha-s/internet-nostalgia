@@ -47,6 +47,22 @@ type ContentItem =
   | { type: 'song'; data: Song; id: string }
   | { type: 'tweet'; data: Tweet; id: string }
 
+// GIF/Image thumbnail for early internet era
+function GifImageThumbnail({ item }: { item: any }) {
+  return (
+    <div
+      className="relative w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden border border-white/20 hover:border-white/40 transition-all hover:scale-105 flex-shrink-0"
+      title={item.title}
+    >
+      <img
+        src={item.url}
+        alt={item.title}
+        className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity"
+      />
+    </div>
+  )
+}
+
 // Video thumbnail - ONLY show if available
 function VideoThumbnail({ item, onSelect }: { item: any, onSelect?: (id: string) => void }) {
   const [isAvailable, setIsAvailable] = useState(false)
@@ -313,13 +329,24 @@ export default function FloatingWordCloud({ words, media = [], songs = [], tweet
                 </span>
               )
             } else if (item.type === 'video') {
-              return (
-                <VideoThumbnail 
-                  key={item.id}
-                  item={item.data} 
-                  onSelect={onVideoSelect} 
-                />
-              )
+              const mediaData = item.data as any
+              // Check if it's a gif/image or YouTube video
+              if (mediaData.type === 'gif' || mediaData.type === 'image') {
+                return (
+                  <GifImageThumbnail 
+                    key={item.id}
+                    item={mediaData}
+                  />
+                )
+              } else {
+                return (
+                  <VideoThumbnail 
+                    key={item.id}
+                    item={mediaData} 
+                    onSelect={onVideoSelect} 
+                  />
+                )
+              }
             } else if (item.type === 'song') {
               return (
                 <SongCard key={item.id} song={item.data as Song} />

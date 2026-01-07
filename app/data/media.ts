@@ -1,12 +1,38 @@
 export interface MediaItem {
-  type: 'youtube' | 'gif'
+  type: 'youtube' | 'gif' | 'image'
   title: string
-  id: string // YouTube video ID or GIF URL
+  id: string // YouTube video ID, GIF URL, or image URL
   thumbnail?: string
+  url?: string // Direct URL for GIFs/images
 }
 
 export const ERA_MEDIA: Record<string, MediaItem[]> = {
-  '2000-2003': [], // YouTube didn't exist yet - only Flash animations and GIFs on websites
+  '2000-2003': [
+    {
+      type: 'gif',
+      title: 'Dancing Baby',
+      id: 'dancing-baby',
+      url: 'https://media.giphy.com/media/IwAZ6dvvvaTtdI8SD5/giphy.gif',
+    },
+    {
+      type: 'gif',
+      title: 'Hamster Dance',
+      id: 'hamster-dance',
+      url: 'https://media.giphy.com/media/3oriNZoNvn73MZaFYk/giphy.gif',
+    },
+    {
+      type: 'image',
+      title: 'All Your Base',
+      id: 'all-your-base',
+      url: 'https://i.imgur.com/G3Vc5xZ.jpeg',
+    },
+    {
+      type: 'gif',
+      title: 'Badger Badger Badger',
+      id: 'badger',
+      url: 'https://media.giphy.com/media/xT5LMQ8rHYTDGFG07e/giphy.gif',
+    },
+  ],
   
   '2004-2006': [
     {
