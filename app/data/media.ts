@@ -265,6 +265,41 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
       title: 'Old Town Road',
       id: 'w2Ov5jzm3j8',
     },
+    {
+      type: 'youtube',
+      title: 'WAP - Cardi B',
+      id: 'hsm4poTWjMs',
+    },
+    {
+      type: 'youtube',
+      title: 'Blinding Lights - The Weeknd',
+      id: 'fHI8X4OXluQ',
+    },
+    {
+      type: 'youtube',
+      title: 'Savage - Megan Thee Stallion',
+      id: 'EOxj2ROIxok',
+    },
+    {
+      type: 'youtube',
+      title: 'Renegade Dance',
+      id: 'oBYj-U_IdoI',
+    },
+    {
+      type: 'youtube',
+      title: 'Bored in the House',
+      id: 'W3GrSMYbkBE',
+    },
+    {
+      type: 'youtube',
+      title: 'Tiger King',
+      id: 'acPhUJljIxk',
+    },
+    {
+      type: 'youtube',
+      title: 'Dreams - Fleetwood Mac Skateboard',
+      id: '4-94JhLEiN0',
+    },
   ],
   
   '2022-2024': [
@@ -312,6 +347,36 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
       type: 'youtube',
       title: 'Skibidi Toilet',
       id: 'WIJmzvQWeTo',
+    },
+    {
+      type: 'youtube',
+      title: 'Subway Surfers Gameplay',
+      id: 'tYa6OLQHrEc',
+    },
+    {
+      type: 'youtube',
+      title: 'NPC Livestream TikTok',
+      id: 'JzlFKCtkKRo',
+    },
+    {
+      type: 'youtube',
+      title: 'Barbie Movie Trailer',
+      id: 'pBk4NYhWNMM',
+    },
+    {
+      type: 'youtube',
+      title: 'Eras Tour',
+      id: 'KudedLV0tP0',
+    },
+    {
+      type: 'youtube',
+      title: 'Flowers - Miley Cyrus',
+      id: 'G7KNmW9a75Y',
+    },
+    {
+      type: 'youtube',
+      title: 'Anti-Hero - Taylor Swift',
+      id: 'b1kbLwvqugk',
     },
   ],
   

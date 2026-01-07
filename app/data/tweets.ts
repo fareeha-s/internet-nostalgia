@@ -187,6 +187,48 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
       date: 'Nov 2020',
       context: 'Election 2020'
     },
+    {
+      text: 'normalize not being ok',
+      author: 'Gen Z Twitter',
+      handle: '@thatshygirl',
+      date: '2020',
+      context: 'Mental health talk'
+    },
+    {
+      text: 'tell me you\'re ___ without telling me you\'re ___',
+      author: 'TikTok Trend',
+      handle: '@tiktokroom',
+      date: '2020',
+      context: 'Viral format'
+    },
+    {
+      text: 'not me doing ___ at 3am',
+      author: 'Twitter Trend',
+      handle: '@relatable',
+      date: '2020',
+      context: 'Relatable tweets'
+    },
+    {
+      text: 'the way I RAN here',
+      author: 'Stan Twitter',
+      handle: '@popbase',
+      date: '2021',
+      context: 'Stan language'
+    },
+    {
+      text: 'this is a safe space',
+      author: 'Comfort Accounts',
+      handle: '@cozyvibes',
+      date: '2020',
+      context: 'Wholesome internet'
+    },
+    {
+      text: 'we\'re all in this together',
+      author: 'Pandemic Tweets',
+      handle: '@staystrong',
+      date: 'Mar 2020',
+      context: 'COVID solidarity'
+    },
   ],
   
   '2022-2024': [
@@ -210,6 +252,55 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
       handle: '@RecessTherapy',
       date: 'Aug 2022',
       context: 'Corn kid'
+    },
+    {
+      text: 'in my brat era',
+      author: 'Charli XCX Fans',
+      handle: '@xcxfans',
+      date: 'Jun 2024',
+      context: 'Brat summer'
+    },
+    {
+      text: 'what\'s your roman empire',
+      author: 'TikTok Trend',
+      handle: '@tiktoktrends',
+      date: '2023',
+      context: 'What you think about'
+    },
+    {
+      text: 'delulu is the solulu',
+      author: 'Gen Z',
+      handle: '@genzhumor',
+      date: '2023',
+      context: 'Delusional positivity'
+    },
+    {
+      text: 'the ick list',
+      author: 'Dating Twitter',
+      handle: '@datingadvice',
+      date: '2023',
+      context: 'Red flags'
+    },
+    {
+      text: 'rizz is short for charisma',
+      author: 'Kai Cenat',
+      handle: '@kaicenat',
+      date: '2022',
+      context: 'Rizz origin'
+    },
+    {
+      text: 'let him cook',
+      author: 'Twitter Slang',
+      handle: '@internetslang',
+      date: '2023',
+      context: 'Let them work'
+    },
+    {
+      text: 'hear me out',
+      author: 'TikTok',
+      handle: '@tiktok',
+      date: '2024',
+      context: 'Controversial takes'
     },
   ],
   
