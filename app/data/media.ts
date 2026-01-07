@@ -200,6 +200,56 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
       title: 'Gen Alpha Slang',
       id: 'j5a0jTc9S10',
     },
+    {
+      type: 'youtube',
+      title: 'Sigma Male Compilation',
+      id: 'Xq3W4FoqKW4',
+    },
+    {
+      type: 'youtube',
+      title: 'Ohio Final Boss',
+      id: 'RMPPjKy42bw',
+    },
+    {
+      type: 'youtube',
+      title: 'Gyatt Explained',
+      id: '5m5fjQzoV0U',
+    },
+    {
+      type: 'youtube',
+      title: 'Mewing Tutorial',
+      id: '9LUMx2qPDlQ',
+    },
+    {
+      type: 'youtube',
+      title: 'Looksmaxxing Guide',
+      id: 'xYkSYWPFh1k',
+    },
+    {
+      type: 'youtube',
+      title: 'Core Aesthetic Explained',
+      id: 'cqd_X7GS_SU',
+    },
+    {
+      type: 'youtube',
+      title: 'Vibe Shift 2025',
+      id: 'grd-K33tOSM',
+    },
+    {
+      type: 'youtube',
+      title: 'Brain Rot Compilation',
+      id: 'iLBBRuVDOo4',
+    },
+    {
+      type: 'youtube',
+      title: 'Gemini AI Demo',
+      id: 'KgbBP9Em00A',
+    },
+    {
+      type: 'youtube',
+      title: 'Agentic AI Explained',
+      id: 'r7qovpFAGrQ',
+    },
   ],
 }
 
