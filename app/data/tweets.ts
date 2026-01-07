@@ -181,20 +181,6 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
       context: 'Among Us peak'
     },
     {
-      text: 'im baby',
-      author: 'Various Users',
-      handle: '@twitter',
-      date: '2019',
-      context: 'Im baby meme'
-    },
-    {
-      text: 'ok boomer',
-      author: 'Gen Z',
-      handle: '@twitter',
-      date: '2019',
-      context: 'Ok boomer trend'
-    },
-    {
       text: 'STOP THE COUNT',
       author: 'Donald Trump',
       handle: '@realDonaldTrump',
@@ -212,20 +198,6 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
       context: 'Demure trend'
     },
     {
-      text: 'its giving....',
-      author: 'Various Users',
-      handle: '@twitter',
-      date: '2022',
-      context: 'Its giving meme'
-    },
-    {
-      text: 'she ate and left no crumbs',
-      author: 'Stan Twitter',
-      handle: '@twitter',
-      date: '2022',
-      context: 'She ate phrase'
-    },
-    {
       text: 'Wednesday Addams dance is everything',
       author: 'Jenna Ortega',
       handle: '@jennaortega',
@@ -239,37 +211,9 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
       date: 'Aug 2022',
       context: 'Corn kid'
     },
-    {
-      text: 'NPC energy',
-      author: 'Various Users',
-      handle: '@twitter',
-      date: '2023',
-      context: 'NPC meme'
-    },
-    {
-      text: 'Roman Empire',
-      author: 'Various Users',
-      handle: '@twitter',
-      date: '2023',
-      context: 'Roman Empire trend'
-    },
   ],
   
   '2025-2026': [
-    {
-      text: 'the great meme reset is happening',
-      author: 'Various Users',
-      handle: '@twitter',
-      date: 'Jan 2026',
-      context: 'Meme reset'
-    },
-    {
-      text: 'we bringing back 2010s memes',
-      author: 'Various Users',
-      handle: '@twitter',
-      date: 'Jan 2026',
-      context: 'Meme comeback'
-    },
     {
       text: 'APT dance is taking over',
       author: 'ROSÉ',

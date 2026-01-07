@@ -18,6 +18,8 @@ export default function Home() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
   const [showSources, setShowSources] = useState(false)
   const [randomSeed] = useState(() => Math.random()) // Shuffle on page load
+  const [visibleSections, setVisibleSections] = useState<Set<number>>(new Set([0, 1, 2])) // Start with first 3 sections visible
+  const observerRef = useRef<IntersectionObserver | null>(null)
 
   // Generate timeline: current month back to Jan 2000
   const timeline = useMemo(() => {
@@ -95,6 +97,42 @@ export default function Home() {
     })
   }
 
+  // Set up intersection observer for lazy loading
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-index') || '0')
+            setVisibleSections(prev => {
+              const newSet = new Set(prev)
+              newSet.add(index)
+              return newSet
+            })
+          }
+        })
+      },
+      {
+        rootMargin: '500px', // Load 500px before entering viewport
+        threshold: 0
+      }
+    )
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect()
+      }
+    }
+  }, [])
+
+  // Helper to check if year changed from previous section
+  const isYearTransition = (index: number): boolean => {
+    if (index === 0) return true
+    const currentYear = timeline[index].getFullYear()
+    const prevYear = timeline[index - 1].getFullYear()
+    return currentYear !== prevYear
+  }
+
   return (
     <main className="relative bg-black">
       {/* Fixed Header */}
@@ -144,68 +182,79 @@ export default function Home() {
           const year = date.getFullYear()
           const month = date.getMonth()
           const era = getEra(year)
-          
-          // Get data for this month
-          const result = getDataForMonth(year, month + 1)
-          const words = result.words || []
-          
-          // Get media, songs, tweets
-          const eraMedia = ERA_MEDIA[era] || []
-          const eraSongs = ERA_SONGS[era] || []
-          const eraTweets = ERA_TWEETS[era] || []
-          
-          // Apply filtering and shuffling
-          const media = isRecentDate(date) 
-            ? shuffleArray(eraMedia, randomSeed + index)
-            : shuffleArray(filterByMonthEligibility(eraMedia, month), randomSeed + index)
-          
-          const songs = isRecentDate(date)
-            ? shuffleArray(eraSongs, randomSeed + index + 1000)
-            : shuffleArray(filterByMonthEligibility(eraSongs, month), randomSeed + index + 1000)
-          
-          const tweets = isRecentDate(date)
-            ? shuffleArray(eraTweets, randomSeed + index + 2000)
-            : shuffleArray(filterByMonthEligibility(eraTweets, month), randomSeed + index + 2000)
-          
-          // Transform words for display
-          const wordCloudWords = words.map(w => {
-            const counts = words.map(word => word.count)
-            const minCount = Math.min(...counts)
-            const maxCount = Math.max(...counts)
-            const normalizedSize = maxCount > minCount
-              ? ((w.count - minCount) / (maxCount - minCount))
-              : 0.5
-            const fontSize = 16 + (normalizedSize * 40)
-            
-            return { text: w.text, size: fontSize }
-          })
+          const showYearLabel = isYearTransition(index)
+          const isVisible = visibleSections.has(index)
 
           return (
             <section
               key={`${year}-${month}-${index}`}
+              data-index={index}
+              ref={(el) => {
+                if (el && observerRef.current && !visibleSections.has(index)) {
+                  observerRef.current.observe(el)
+                }
+              }}
               className="min-h-screen flex flex-col items-center justify-center py-12 md:py-16 px-4 md:px-8 border-b border-white/5"
             >
-              {/* Date Header */}
-              <div className="mb-8 text-center">
-                <h2 className="text-2xl md:text-4xl font-light tracking-wider text-white/90 mb-2">
-                  {format(date, 'yyyy')}
-                </h2>
-                <p className="text-sm md:text-base text-white/50 font-light">
-                  {format(date, 'MMMM')}
-                </p>
-              </div>
+              {/* Year Header - only show on year transitions */}
+              {showYearLabel && (
+                <div className="mb-8 text-center">
+                  <h2 className="text-3xl md:text-5xl font-light tracking-wider text-white/90">
+                    {format(date, 'yyyy')}
+                  </h2>
+                </div>
+              )}
 
-              {/* Word Cloud */}
-              <div className="w-full max-w-7xl">
-                <FloatingWordCloud 
-                  words={wordCloudWords} 
-                  media={media}
-                  songs={songs}
-                  tweets={tweets}
-                  onVideoSelect={setSelectedVideo}
-                  key={`cloud-${year}-${month}-${randomSeed}`}
-                />
-              </div>
+              {/* Lazy load content */}
+              {isVisible && (() => {
+                // Get data for this month
+                const result = getDataForMonth(year, month + 1)
+                const words = result.words || []
+                
+                // Get media, songs, tweets
+                const eraMedia = ERA_MEDIA[era] || []
+                const eraSongs = ERA_SONGS[era] || []
+                const eraTweets = ERA_TWEETS[era] || []
+                
+                // Apply filtering and shuffling
+                const media = isRecentDate(date) 
+                  ? shuffleArray(eraMedia, randomSeed + index)
+                  : shuffleArray(filterByMonthEligibility(eraMedia, month), randomSeed + index)
+                
+                const songs = isRecentDate(date)
+                  ? shuffleArray(eraSongs, randomSeed + index + 1000)
+                  : shuffleArray(filterByMonthEligibility(eraSongs, month), randomSeed + index + 1000)
+                
+                const tweets = isRecentDate(date)
+                  ? shuffleArray(eraTweets, randomSeed + index + 2000)
+                  : shuffleArray(filterByMonthEligibility(eraTweets, month), randomSeed + index + 2000)
+                
+                // Transform words for display
+                const wordCloudWords = words.map(w => {
+                  const counts = words.map(word => word.count)
+                  const minCount = Math.min(...counts)
+                  const maxCount = Math.max(...counts)
+                  const normalizedSize = maxCount > minCount
+                    ? ((w.count - minCount) / (maxCount - minCount))
+                    : 0.5
+                  const fontSize = 16 + (normalizedSize * 40)
+                  
+                  return { text: w.text, size: fontSize }
+                })
+
+                return (
+                  <div className="w-full max-w-7xl">
+                    <FloatingWordCloud 
+                      words={wordCloudWords} 
+                      media={media}
+                      songs={songs}
+                      tweets={tweets}
+                      onVideoSelect={setSelectedVideo}
+                      key={`cloud-${year}-${month}-${randomSeed}`}
+                    />
+                  </div>
+                )
+              })()}
             </section>
           )
         })}
