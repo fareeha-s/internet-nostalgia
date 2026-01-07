@@ -267,46 +267,28 @@ export default function Home() {
 
   return (
     <main className="relative bg-black">
-      {/* Year Controls - iOS style with dial - positioned for mobile */}
-      <div className="fixed right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 flex items-center gap-2 sm:gap-3">
-        {/* Interactive Dial Scrubber */}
+      {/* Year Picker - iOS style - draggable to navigate */}
+      <div className="fixed right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-40">
+        {/* Year Display - Draggable */}
         <div 
           ref={dialRef}
-          className="relative w-8 sm:w-10 md:w-12 h-32 sm:h-40 md:h-48 bg-black/60 backdrop-blur-sm rounded-full border border-white/20 cursor-grab active:cursor-grabbing touch-none select-none"
+          className="relative flex flex-col items-center bg-black/60 backdrop-blur-sm rounded-lg px-2 sm:px-3 cursor-grab active:cursor-grabbing touch-none select-none"
           onMouseDown={handleDialMouseDown}
           onTouchStart={handleDialTouchStart}
-          title="Drag to jump to a year"
+          title="Drag up/down to jump to a year"
         >
-          {/* Notches/tick marks */}
-          <div className="absolute inset-0 flex flex-col justify-between py-3 sm:py-4 md:py-5 px-1">
-            {Array.from({ length: 7 }).map((_, i) => (
-              <div 
-                key={i} 
-                className="w-full h-px bg-white/20"
-              />
-            ))}
-          </div>
+          {/* Selection highlight bar */}
+          <div className="absolute top-1/2 -translate-y-1/2 w-full h-8 sm:h-10 md:h-12 bg-white/5 border-y border-white/10 pointer-events-none rounded" />
           
-          {/* Center indicator */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1 sm:w-1.5 h-3 sm:h-4 bg-white rounded-full" />
-          
-          {/* Drag hint icon */}
-          <div className="absolute left-1/2 top-2 -translate-x-1/2 text-white/30 text-[8px] sm:text-[9px]">
-            <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
+          {/* Drag hint arrows */}
+          <div className="absolute -left-1 top-1/2 -translate-y-1/2 flex flex-col gap-1 text-white/20">
+            <svg className="w-2 h-2 sm:w-3 sm:h-3" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+            </svg>
+            <svg className="w-2 h-2 sm:w-3 sm:h-3" fill="currentColor" viewBox="0 0 24 24">
               <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
             </svg>
           </div>
-          <div className="absolute left-1/2 bottom-2 -translate-x-1/2 text-white/30 text-[8px] sm:text-[9px]">
-            <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
-            </svg>
-          </div>
-        </div>
-
-        {/* Year Display */}
-        <div className="relative flex flex-col items-center bg-black/60 backdrop-blur-sm rounded-lg px-1 sm:px-2">
-          {/* Selection highlight bar */}
-          <div className="absolute top-1/2 -translate-y-1/2 w-full h-8 sm:h-10 md:h-12 bg-white/5 border-y border-white/10 pointer-events-none rounded" />
           
           {/* Years stack - compact on mobile */}
           <div className="flex flex-col items-center py-1 sm:py-2 overflow-hidden">
@@ -388,8 +370,8 @@ export default function Home() {
         )}
       </div>
 
-      {/* Scrollable Sections - Only render what's needed, with right padding for year controls */}
-      <div className="pt-20 sm:pt-24 md:pt-32 pb-32 max-w-7xl mx-auto pr-16 sm:pr-20 md:pr-28">
+      {/* Scrollable Sections - Only render what's needed, with right padding for year picker */}
+      <div className="pt-20 sm:pt-24 md:pt-32 pb-32 max-w-7xl mx-auto pr-14 sm:pr-16 md:pr-20">
         {(() => {
           // Build year cards sequentially with global no-repeat guarantees.
           const seen = {
