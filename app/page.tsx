@@ -177,13 +177,13 @@ export default function Home() {
                 ERALEXICON
               </h1>
               <p className="text-xs md:text-sm text-white/60 max-w-2xl">
-                vibing through internet history one month at a time. watch the discourse evolve, the memes mutate, and the brain rot spread across eras.
+                words that defined each month. scroll through internet culture by era.
               </p>
               <button
                 className="text-[11px] md:text-xs text-white/60 underline hover:text-white transition"
                 onClick={() => setShowSources((v) => !v)}
               >
-                {showSources ? 'hide sources' : 'where the data from?'}
+                {showSources ? 'hide sources' : 'data sources'}
               </button>
             </div>
             
@@ -201,11 +201,10 @@ export default function Home() {
 
           {showSources && (
             <div className="mb-4 md:mb-6 text-[11px] md:text-xs text-white/70 bg-white/5 border border-white/10 rounded-lg p-3 md:p-4 space-y-1">
-              <p className="font-semibold text-white/80">where we get the vibes:</p>
-              <p>• reddit (the trenches, curated by era)</p>
-              <p>• know your meme (meme archaeology)</p>
-              <p>• youtube (the viral videos that defined each moment)</p>
-              <p className="text-white/50 mt-2 italic">no cap, all public data. we're just vibing.</p>
+              <p className="font-semibold text-white/80">sources:</p>
+              <p>• reddit top posts by era</p>
+              <p>• know your meme</p>
+              <p>• youtube viral videos</p>
             </div>
           )}
 
