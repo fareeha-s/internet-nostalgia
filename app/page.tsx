@@ -219,12 +219,22 @@ export default function Home() {
               <p className="text-xs md:text-sm text-white/60 max-w-2xl">
                 words, videos, and songs that defined each era. scroll through time.
               </p>
-              <button
-                className="text-[11px] md:text-xs text-white/60 underline hover:text-white transition"
-                onClick={() => setShowSources((v) => !v)}
-              >
-                {showSources ? 'hide sources' : 'data sources'}
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  className="text-[11px] md:text-xs text-white/60 underline hover:text-white transition"
+                  onClick={() => setShowSources((v) => !v)}
+                >
+                  {showSources ? 'hide sources' : 'data sources'}
+                </button>
+                <a
+                  href="https://fareeha.sh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] md:text-[11px] text-white/30 hover:text-white/60 transition-colors duration-300"
+                >
+                  by fareeha ✨
+                </a>
+              </div>
             </div>
             
             <div className="text-right">
