@@ -138,13 +138,13 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
   '2016-2018': [
     {
       type: 'youtube',
-      title: 'Cash Me Outside Dr Phil',
-      id: 'jgflCE7zRpc',
+      title: 'Crypto Bro Explaining Blockchain',
+      id: 'g-zIbVEjVpQ',
     },
     {
       type: 'youtube',
-      title: 'Bottle Flip Challenge',
-      id: 'kJXRBjC7QVc',
+      title: 'Bitcoin Pizza Day',
+      id: 'A5PSJYfJbLk',
     },
     {
       type: 'youtube',
@@ -158,8 +158,8 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Logan Paul Japan Incident',
-      id: 'ZMxQHQj5-jo',
+      title: 'This Is America Childish Gambino',
+      id: 'VYOjWnS4cMY',
     },
     {
       type: 'youtube',
@@ -168,8 +168,8 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Fidget Spinner Tricks',
-      id: 'Yx7e8qQy56U',
+      title: 'Explaining Blockchain',
+      id: 'SSo_EIwHSd4',
     },
     {
       type: 'youtube',
@@ -191,8 +191,8 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Among Us Original Trailer',
-      id: 'grd-K33tOSM',
+      title: 'GameStop Explained',
+      id: 'zeiv685c4lg',
     },
     {
       type: 'youtube',
@@ -201,8 +201,8 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Ratatouille Musical TikTok',
-      id: 'M1EcVWSSgOY',
+      title: 'NFT Explained',
+      id: 'Oz9zw7-_vhM',
     },
     {
       type: 'youtube',
@@ -211,51 +211,51 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Sea Shanty TikTok',
-      id: '8q8WvQlPrw8',
+      title: 'Line Goes Up NFT Documentary',
+      id: 'YQ_xWvX1n9g',
     },
     {
       type: 'youtube',
-      title: 'Fauci Ouchie Remix',
-      id: 'Xvr2M7MvOY0',
+      title: 'WAGMI Explained',
+      id: 'PvZGPx3INQY',
     },
   ],
   
   '2022-2024': [
     {
       type: 'youtube',
-      title: 'Wednesday Dance',
-      id: 'xYkSYWPFh1k',
+      title: 'Sam Altman Fired OpenAI',
+      id: 'VT4ySKMS4uY',
     },
     {
       type: 'youtube',
-      title: 'Grimace Shake Trend',
-      id: '9LUMx2qPDlQ',
+      title: 'ChatGPT Announcement',
+      id: 'U9mJuUkhUzk',
     },
     {
       type: 'youtube',
-      title: 'Corn Kid Interview',
-      id: '_caMQpiwiaU',
+      title: 'Midjourney v5 Reveal',
+      id: '0dh_K9bKTBk',
     },
     {
       type: 'youtube',
-      title: 'Girl Explaining Dinner',
-      id: 'yfPjpW5DPKk',
+      title: 'AI Alignment Debate',
+      id: 'L_uX4qp6da0',
     },
     {
       type: 'youtube',
-      title: 'Bing Chilling John Cena',
-      id: 'bOZ2b5adjd4',
+      title: 'e/acc Explained',
+      id: 'sNACHEw8D-U',
     },
     {
       type: 'youtube',
-      title: 'Roman Empire TikTok',
-      id: 'SNYLv9TgsTA',
+      title: 'Touch Grass Meme',
+      id: 'eFDuQiW1xHs',
     },
     {
       type: 'youtube',
-      title: 'Girl Dinner Explained',
-      id: 'gKzWLM-AUt8',
+      title: 'FTX Collapse Explained',
+      id: 'iLLeZPSiVI0',
     },
     {
       type: 'youtube',
@@ -267,13 +267,13 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
   '2025-2026': [
     {
       type: 'youtube',
-      title: 'Very Demure Very Mindful',
-      id: 'wWHjV35mh6k',
+      title: 'Founder Mode Paul Graham',
+      id: 'nZiuiFs0tVo',
     },
     {
       type: 'youtube',
-      title: 'Hawk Tuah Girl Interview',
-      id: 'oIkhyHPMcAg',
+      title: 'DeepSeek R1 Explained',
+      id: 'bI-FS7aGJl0',
     },
     {
       type: 'youtube',
@@ -282,18 +282,18 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Mr Beast $1 vs $500,000',
-      id: 'sxb6b7tN2KE',
+      title: 'OpenAI o3 Demo',
+      id: 'SKBG1sqdyIU',
     },
     {
       type: 'youtube',
-      title: 'Apple Dance Trend',
-      id: 'qYApvyc0S4k',
+      title: 'Brat Summer Explained',
+      id: 'v1RxTDJRZOc',
     },
     {
       type: 'youtube',
-      title: 'Wicked Movie Trailer',
-      id: 'cYMpy1x4hlE',
+      title: 'Very Demure Very Mindful',
+      id: 'wWHjV35mh6k',
     },
     {
       type: 'youtube',

@@ -44,11 +44,11 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
   
   '2013-2015': [
     {
-      text: 'WHAT ARE THOSEEEEE',
-      author: 'Brandon Moore',
-      handle: '@youngbusco',
-      date: 'Jun 2015',
-      context: 'Viral meme origin'
+      text: 'Make something people want.',
+      author: 'Paul Graham',
+      handle: '@paulg',
+      date: '2014',
+      context: 'YC motto'
     },
     {
       text: 'If only Bradley\'s arm was longer. Best photo ever. #oscars',
@@ -75,35 +75,35 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
       context: 'Covfefe typo'
     },
     {
-      text: 'Cash me ousside how bout dah',
-      author: 'Danielle Bregoli',
-      handle: '@bhadbhabie',
-      date: '2016',
-      context: 'Dr Phil meme'
+      text: 'Bitcoin is rat poison squared',
+      author: 'Warren Buffett',
+      handle: '@WarrenBuffett',
+      date: 'May 2018',
+      context: 'Crypto skeptic'
     },
     {
-      text: 'Yanny or Laurel?',
-      author: 'Cloe Feldman',
-      handle: '@CloeCouture',
-      date: 'May 15, 2018',
-      context: 'Audio illusion debate'
+      text: 'nobody:\nabsolutely nobody:\nstill nobody:\nme:',
+      author: 'Various',
+      handle: '@internet',
+      date: '2018',
+      context: 'Nobody meme format'
     },
   ],
   
   '2019-2021': [
     {
-      text: 'STOP THE COUNT!',
-      author: 'Donald Trump',
-      handle: '@realDonaldTrump',
-      date: 'Nov 5, 2020',
-      context: '2020 election'
+      text: 'Have fun staying poor',
+      author: 'Various CT',
+      handle: '@CT_Anon',
+      date: '2020',
+      context: 'Crypto Twitter HFSP'
     },
     {
-      text: 'Not me having to clean up my Twitter from saying "if I get corona I get corona"',
-      author: 'Brady Sluder',
-      handle: '@BradySluder',
-      date: 'Mar 2020',
-      context: 'COVID denial meme'
+      text: 'gm',
+      author: 'Everyone on CT',
+      handle: '@cryptotwitter',
+      date: '2020-2021',
+      context: 'Good morning ritual'
     },
     {
       text: 'i am once again asking for your financial support',
@@ -116,42 +116,42 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
   
   '2022-2024': [
     {
-      text: 'Very demure, very mindful',
-      author: 'Jools Lebron',
-      handle: '@joolieannie',
-      date: 'Aug 2024',
-      context: 'Demure trend'
+      text: 'The fundamental problem with programming is that it is a constant battle against complexity',
+      author: 'John Carmack',
+      handle: '@ID_AA_Carmack',
+      date: '2023',
+      context: 'AGI takes'
     },
     {
-      text: 'hawk tuah spit on that thang',
-      author: 'Haliey Welch',
-      handle: '@hay_welch',
-      date: 'Jun 2024',
-      context: 'Hawk tuah girl'
+      text: 'effective accelerationism is the only way forward',
+      author: 'Based Beff Jezos',
+      handle: '@BasedBeffJezos',
+      date: '2023',
+      context: 'e/acc movement'
     },
     {
-      text: 'It\'s corn! A big lump with knobs',
-      author: 'Tariq',
-      handle: '@tariq',
-      date: 'Aug 2022',
-      context: 'Corn kid'
+      text: 'touch grass',
+      author: 'Everyone',
+      handle: '@internet',
+      date: '2022-2024',
+      context: 'Go outside'
     },
   ],
   
   '2025-2026': [
     {
-      text: 'brat summer is never over',
-      author: 'Charli XCX',
-      handle: '@charli_xcx',
-      date: 'Jun 2024',
-      context: 'Brat album era'
+      text: 'Founder mode is real and it\'s about being in the details',
+      author: 'Brian Chesky',
+      handle: '@bchesky',
+      date: 'Sep 2024',
+      context: 'Founder mode'
     },
     {
-      text: 'I\'m very demure, very mindful, very cutesy',
-      author: 'Jools Lebron',
-      handle: '@joolieannie',
-      date: 'Aug 2024',
-      context: 'Original demure tweet'
+      text: 'we are so back',
+      author: 'Tech Twitter',
+      handle: '@techtwitter',
+      date: '2024-2025',
+      context: 'Optimism posting'
     },
     {
       text: 'kamala IS brat',
