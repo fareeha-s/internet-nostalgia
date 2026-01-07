@@ -147,18 +147,18 @@ export const ERA_TWEETS: Record<string, TweetItem[]> = {
       context: 'Brat album era'
     },
     {
-      text: 'we\'re so back',
-      author: 'Elon Musk',
-      handle: '@elonmusk',
-      date: 'Jan 2025',
-      context: 'X rebrand era'
-    },
-    {
       text: 'I\'m very demure, very mindful, very cutesy',
       author: 'Jools Lebron',
       handle: '@joolieannie',
       date: 'Aug 2024',
       context: 'Original demure tweet'
+    },
+    {
+      text: 'kamala IS brat',
+      author: 'Charli XCX',
+      handle: '@charli_xcx',
+      date: 'Jul 2024',
+      context: 'Kamala brat tweet'
     },
   ],
 }
