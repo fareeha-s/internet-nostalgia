@@ -110,13 +110,13 @@ export default function Home() {
     const date = timeline[index]
     if (date) {
       setCurrentDate(date)
-      setShuffleKey(prev => prev + 1) // Trigger content shuffle
     }
   }
   
   const handleSliderMouseUp = () => {
     setIsDragging(false)
     fetchData(timeIndex)
+    setShuffleKey(prev => prev + 1) // Shuffle on every release
   }
   
   const handleSliderMouseDown = () => {
