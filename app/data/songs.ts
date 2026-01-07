@@ -166,27 +166,6 @@ export const ERA_SONGS: Record<string, SongItem[]> = {
       memeContext: 'It\'s corn!'
     },
     {
-      title: 'Unholy',
-      artist: 'Sam Smith, Kim Petras',
-      spotifyId: '3nqQXoyQOWXiESFLlDF1hG',
-      memeContext: 'TikTok dance trend'
-    },
-    {
-      title: 'Cupid - Twin Ver.',
-      artist: 'FIFTY FIFTY',
-      spotifyId: '4e1aewX6ATPcdfQIqr7gqO',
-      memeContext: 'TikTok viral'
-    },
-    {
-      title: 'Lazy Sunday',
-      artist: 'The Lonely Island',
-      spotifyId: '0eH2Az7LCW3RQMOvdddDja',
-      memeContext: 'SNL viral classic'
-    },
-  ],
-  
-  '2025-2026': [
-    {
       title: '360',
       artist: 'Charli XCX',
       spotifyId: '4w3tQBXhn5345eUXDGBWZG',
@@ -199,16 +178,43 @@ export const ERA_SONGS: Record<string, SongItem[]> = {
       memeContext: 'Brat summer dance'
     },
     {
-      title: 'Ugh!',
-      artist: 'Kawai Sprite',
-      spotifyId: '1QDvYheH7ZoXWqHqjWJKYf',
-      memeContext: 'FNF viral moment'
-    },
-    {
       title: 'Espresso',
       artist: 'Sabrina Carpenter',
       spotifyId: '2qSkIjg1o9h3YT9RAgYN75',
-      memeContext: 'TikTok trend'
+      memeContext: 'That\'s that me espresso'
+    },
+    {
+      title: 'Cupid - Twin Ver.',
+      artist: 'FIFTY FIFTY',
+      spotifyId: '4e1aewX6ATPcdfQIqr7gqO',
+      memeContext: 'TikTok viral'
+    },
+    {
+      title: 'Unholy',
+      artist: 'Sam Smith, Kim Petras',
+      spotifyId: '3nqQXoyQOWXiESFLlDF1hG',
+      memeContext: 'TikTok dance trend'
+    },
+  ],
+  
+  '2025-2026': [
+    {
+      title: 'APT.',
+      artist: 'ROSÉ & Bruno Mars',
+      spotifyId: '5vNRhkKd0yEAg8suGBpjeY',
+      memeContext: 'Viral drinking game song'
+    },
+    {
+      title: 'Birds of a Feather',
+      artist: 'Billie Eilish',
+      spotifyId: '6dOtVTDdiauQNBQEDOtlAB',
+      memeContext: 'HIT ME HARD AND SOFT viral'
+    },
+    {
+      title: 'Million Dollar Baby',
+      artist: 'Tommy Richman',
+      spotifyId: '5G2f63n7IPVPPjfNIGih7Q',
+      memeContext: 'I\'m a million dollar baby'
     },
   ],
 }

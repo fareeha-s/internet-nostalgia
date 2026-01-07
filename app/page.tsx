@@ -294,7 +294,7 @@ export default function Home() {
             <div className="relative flex justify-between items-center px-0.5">
               {/* Show fewer years on mobile */}
               <div className="hidden md:flex w-full justify-between">
-                {[2026, 2024, 2022, 2020, 2018, 2016, 2014, 2012, 2010, 2008].map((year) => (
+                {[2026, 2024, 2022, 2020, 2018, 2016, 2014, 2012, 2010, 2008, 2006, 2004, 2002, 2000].map((year) => (
                   <div key={year} className="flex flex-col items-center">
                     <div className="w-px h-2 bg-white/20 mb-1" />
                     <span className="text-[10px] text-white/30 font-light">{year}</span>
@@ -302,7 +302,7 @@ export default function Home() {
                 ))}
               </div>
               <div className="flex md:hidden w-full justify-between">
-                {[2026, 2022, 2018, 2014, 2010].map((year) => (
+                {[2026, 2020, 2014, 2008, 2002].map((year) => (
                   <div key={year} className="flex flex-col items-center">
                     <div className="w-px h-2 bg-white/20 mb-1" />
                     <span className="text-[10px] text-white/30 font-light">{year}</span>

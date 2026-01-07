@@ -275,44 +275,6 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Grimace Shake Trend',
-      id: '9LUMx2qPDlQ',
-    },
-    {
-      type: 'youtube',
-      title: 'Corn Kid Interview',
-      id: '_caMQpiwiaU',
-    },
-    {
-      type: 'youtube',
-      title: 'Girl Dinner Explained',
-      id: 'gKzWLM-AUt8',
-    },
-    {
-      type: 'youtube',
-      title: 'Bing Chilling John Cena',
-      id: 'bOZ2b5adjd4',
-    },
-    {
-      type: 'youtube',
-      title: 'Roman Empire TikTok',
-      id: 'SNYLv9TgsTA',
-    },
-    {
-      type: 'youtube',
-      title: 'NPC Livestream',
-      id: '0zG_lckuzbo',
-    },
-    {
-      type: 'youtube',
-      title: 'ChatGPT Revealed',
-      id: 'U9mJuUkhUzk',
-    },
-  ],
-  
-  '2025-2026': [
-    {
-      type: 'youtube',
       title: 'Very Demure Very Mindful',
       id: 'wWHjV35mh6k',
     },
@@ -328,38 +290,61 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Apple Dance Trend',
-      id: 'qYApvyc0S4k',
-    },
-    {
-      type: 'youtube',
       title: 'Brat Summer Explained',
       id: 'v1RxTDJRZOc',
     },
     {
       type: 'youtube',
-      title: 'Skibidi Toilet 77',
+      title: 'Corn Kid Interview',
+      id: '_caMQpiwiaU',
+    },
+    {
+      type: 'youtube',
+      title: 'Grimace Shake Trend',
+      id: '9LUMx2qPDlQ',
+    },
+    {
+      type: 'youtube',
+      title: 'Girl Dinner Explained',
+      id: 'gKzWLM-AUt8',
+    },
+    {
+      type: 'youtube',
+      title: 'Skibidi Toilet',
       id: 'WIJmzvQWeTo',
     },
+  ],
+  
+  '2025-2026': [
     {
       type: 'youtube',
-      title: 'Sigma Grindset Meme',
-      id: '1-emQo-7O3Y',
+      title: 'DeepSeek R1 Announcement',
+      id: 'eIWvFz1roJc',
     },
     {
       type: 'youtube',
-      title: 'AI Sora Demo',
-      id: 'HK6y8DAPN_0',
+      title: 'TikTok Ban Supreme Court',
+      id: '1zn5_0h-VDg',
     },
     {
       type: 'youtube',
-      title: 'ChatGPT-4o Demo',
-      id: 'DQacCB9tDaw',
+      title: 'OpenAI o3 Demo',
+      id: 'SKBG1sqdyIU',
     },
     {
       type: 'youtube',
-      title: 'Mr Beast Squid Game',
-      id: '0e3GPea1Tyg',
+      title: 'Apple Intelligence Ad',
+      id: 'Q_EYoV1kZWk',
+    },
+    {
+      type: 'youtube',
+      title: 'ChatGPT Search Launch',
+      id: 'et9HG_dZ7Cg',
+    },
+    {
+      type: 'youtube',
+      title: 'Gemini 2.0 Flash',
+      id: 'kJ_K0LZfG84',
     },
   ],
 }
