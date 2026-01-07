@@ -207,53 +207,38 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
   '2025-2026': [
     {
       type: 'youtube',
-      title: 'Sora AI Demo - OpenAI',
-      id: 'HK6y8DAPN_0',
+      title: 'Charli XCX - Apple',
+      id: 'h64RD_qHbwY',
     },
     {
       type: 'youtube',
-      title: 'Apple - Charli XCX (Official Video)',
-      id: 'OlnJWYZnPmU',
+      title: 'Sabrina Carpenter - Espresso',
+      id: 'eVli-tstM5E',
     },
     {
       type: 'youtube',
-      title: 'Very Demure Very Mindful',
-      id: 'tRRrWKs8s48',
+      title: 'Billie Eilish - LUNCH',
+      id: 'R0X8ZLZVQ3E',
     },
     {
       type: 'youtube',
-      title: 'Skibidi Toilet Episode 1',
-      id: 'WIJmzvQWeTo',
+      title: 'Chappell Roan - Good Luck, Babe!',
+      id: 'GxldQ9IdV-w',
     },
     {
       type: 'youtube',
-      title: 'Mr Beast - $1 vs $500,000 Experience',
-      id: 'NEYc8ar2Bpw',
+      title: 'Kendrick Lamar - Not Like Us',
+      id: 'dQw4w9WgXcQ',
     },
     {
       type: 'youtube',
-      title: 'Hailey Welch Hawk Tuah',
-      id: 'oIkhyHPMcAg',
+      title: 'Tyla - Water',
+      id: 'bRYG_26wwjk',
     },
     {
       type: 'youtube',
-      title: 'Tyla - Water Dance Challenge',
-      id: 'uj8GGW8HgGU',
-    },
-    {
-      type: 'youtube',
-      title: 'OpenAI o1 Preview Demo',
-      id: 'RdRCniteGIo',
-    },
-    {
-      type: 'youtube',
-      title: 'Kendrick vs Drake - Not Like Us',
-      id: 'mAkAfDFgYGE',
-    },
-    {
-      type: 'youtube',
-      title: 'Chappell Roan - Pink Pony Club',
-      id: 'XF1dCbEE9wU',
+      title: 'Mr Beast $1 vs $500,000 Plane Ticket',
+      id: 'sxb6b7tN2KE',
     },
     {
       type: 'youtube',
@@ -262,23 +247,23 @@ export const ERA_MEDIA: Record<string, MediaItem[]> = {
     },
     {
       type: 'youtube',
-      title: 'Beyoncé - Texas Hold Em',
-      id: 'wjbO80jKW_c',
-    },
-    {
-      type: 'youtube',
-      title: 'ChatGPT-4o Demo',
-      id: 'DQacCB9tDaw',
-    },
-    {
-      type: 'youtube',
       title: 'Deadpool & Wolverine Trailer',
       id: '73_1biulkYk',
     },
     {
       type: 'youtube',
-      title: 'Looksmaxxing Explained',
-      id: 'pf0kKmJXG7Q',
+      title: 'Inside Out 2 Trailer',
+      id: 'LEjhY15eCx0',
+    },
+    {
+      type: 'youtube',
+      title: 'Dune Part Two Trailer',
+      id: 'Way9Dexny3w',
+    },
+    {
+      type: 'youtube',
+      title: 'Moo Deng Baby Hippo',
+      id: 'R7DhGLXp_6E',
     },
   ],
 }
