@@ -31,8 +31,34 @@ interface FloatingWordCloudProps {
   onVideoSelect?: (id: string) => void
 }
 
-// Video thumbnail - always show
+// Video thumbnail - ONLY show if available
 function VideoThumbnail({ item, onSelect }: { item: any, onSelect?: (id: string) => void }) {
+  const [isAvailable, setIsAvailable] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  
+  useEffect(() => {
+    // Strictly check if video thumbnail exists
+    const img = new Image()
+    img.onload = () => {
+      // YouTube returns 120x90 default image for unavailable videos
+      // Real thumbnails are 320x180 or larger
+      if (img.naturalWidth > 120 && img.naturalHeight > 90) {
+        setIsAvailable(true)
+        setImageLoaded(true)
+      } else {
+        setIsAvailable(false)
+      }
+    }
+    img.onerror = () => {
+      setIsAvailable(false)
+    }
+    img.src = `https://img.youtube.com/vi/${item.id}/mqdefault.jpg`
+  }, [item.id])
+
+  // DO NOT RENDER if video is not available
+  if (!isAvailable) return null
+  if (!imageLoaded) return null
+
   return (
     <button
       className="group relative w-20 h-14 md:w-28 md:h-20 rounded-lg overflow-hidden border border-white/20 hover:border-white/40 transition-all hover:scale-105 flex-shrink-0"
@@ -43,10 +69,6 @@ function VideoThumbnail({ item, onSelect }: { item: any, onSelect?: (id: string)
         src={`https://img.youtube.com/vi/${item.id}/mqdefault.jpg`}
         alt={item.title}
         className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity"
-        onError={(e) => {
-          // Fallback to default thumbnail if image fails
-          e.currentTarget.src = `https://img.youtube.com/vi/${item.id}/default.jpg`
-        }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
       <div className="absolute inset-0 flex items-center justify-center">
