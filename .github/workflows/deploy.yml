@@ -2,26 +2,28 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
 
 jobs:
-  export-and-deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
       - name: Install dependencies
-        run: npm ci
-
-      - name: Build and export
-        run: npm run export
-
+        run: bun install --frozen-lockfile
+      - name: Build static site
+        run: bun run build
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
-

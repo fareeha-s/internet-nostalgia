@@ -15,27 +15,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      - uses: oven-sh/setup-bun@v2
 
       - name: Install dependencies
-        run: npm install
+        run: bun install --frozen-lockfile
 
       - name: Fetch trending content
-        run: node scripts/update-trending.js
-
-      - name: Build site
-        run: npm run export
-
-      - name: Prepare static files
-        run: |
-          rm -rf _next index.html 404.html
-          mkdir -p _next
-          cp -r .next/static ./_next/
-          cp .next/server/app/index.html ./index.html
-          cp .next/server/app/_not-found.html ./404.html
+        run: bun scripts/update-trending.js
 
       - name: Commit and push changes
         run: |

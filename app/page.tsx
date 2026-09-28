@@ -1,392 +1,86 @@
 'use client'
 
-import { useState, useMemo, useEffect, useRef, useCallback } from 'react'
-import FloatingWordCloud from './components/FloatingWordCloud'
-import MediaGallery from './components/MediaGallery'
-import { ERA_MEDIA } from './data/media'
+import { useEffect, useState } from 'react'
+import { ERA_MEDIA, type MediaItem } from './data/media'
 import { ERA_SONGS } from './data/songs'
 import { ERA_TWEETS } from './data/tweets'
 import { getTermsForEra } from './utils/eraData'
+import MediaGallery from './components/MediaGallery'
 
-interface WordData {
-  text: string
-  count: number
+const ERAS = [
+  { years: '2025-2026', label: 'Now', mood: 'The internet is everywhere' },
+  { years: '2022-2024', label: 'The feed', mood: 'Everything is content' },
+  { years: '2019-2021', label: 'Online together', mood: 'The world moves indoors' },
+  { years: '2016-2018', label: 'Always connected', mood: 'The timeline never sleeps' },
+  { years: '2013-2015', label: 'The social era', mood: 'Post it, share it, repeat' },
+  { years: '2010-2012', label: 'Going viral', mood: 'Everybody has a camera' },
+  { years: '2007-2009', label: 'The early platforms', mood: 'A new kind of internet' },
+  { years: '2004-2006', label: 'The web wakes up', mood: 'Your world, online' },
+  { years: '2000-2003', label: 'The beginning', mood: 'Before everything changed' },
+]
+
+function MediaCard({ item, onPlay }: { item: MediaItem; onPlay: (id: string) => void }) {
+  const [imageFailed, setImageFailed] = useState(false)
+  const image = item.type === 'youtube' ? `https://img.youtube.com/vi/${item.id}/hqdefault.jpg` : item.url
+  const content = <><div className="media-image">
+    {image && !imageFailed ? (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img src={image} alt="" loading="lazy" onError={() => setImageFailed(true)} />
+    ) : <span className="media-placeholder">{item.type === 'youtube' ? '▶' : '✦'}</span>}
+    {item.type === 'youtube' && <span className="play-badge">▶ Watch</span>}
+  </div><span className="media-title">{item.title}</span></>
+  return item.type === 'youtube' ? <button type="button" className="media-card" onClick={() => onPlay(item.id)} aria-label={`Watch ${item.title}`}>{content}</button>
+    : <a className="media-card" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${item.title}`}>{content}</a>
+}
+
+function EraSection({ era, index, onPlay }: { era: typeof ERAS[number]; index: number; onPlay: (id: string) => void }) {
+  const words = getTermsForEra(era.years).slice(0, 20)
+  const media = ERA_MEDIA[era.years] || []
+  const songs = ERA_SONGS[era.years] || []
+  const tweets = ERA_TWEETS[era.years] || []
+  return <section id={era.years} className={`era-section era-tone-${index % 3}`} aria-label={`${era.years}: ${era.label}`}>
+    <div className="era-inner">
+      <div className="era-topline"><span>CHAPTER {String(index + 1).padStart(2, '0')} / 09</span><span>SCROLL TO EXPLORE ↓</span></div>
+      <div className="era-hero"><p className="eyebrow">{era.years} · {era.mood}</p><h2>{era.label}<span className="period">.</span></h2><p>A little of what the internet looked, sounded and felt like from {era.years.replace('-', ' to ')}.</p></div>
+      <div className="era-detail">
+        <section className="content-section" aria-labelledby={`words-${index}`}><div className="section-heading"><h3 id={`words-${index}`}>The words</h3><span>{words.length} memories</span></div><div className="word-list">{words.map((word, i) => <a key={word.text} className={`word-chip word-size-${i % 4}`} href={`https://www.google.com/search?q=${encodeURIComponent(word.text)}`} target="_blank" rel="noopener noreferrer">{word.text} <span>↗</span></a>)}</div></section>
+        {media.length > 0 && <section className="content-section" aria-labelledby={`media-${index}`}><div className="section-heading"><h3 id={`media-${index}`}>On screen</h3><span>{media.length} clips &amp; images</span></div><div className="media-grid">{media.map((item) => <MediaCard key={`${item.type}-${item.id}`} item={item} onPlay={onPlay} />)}</div></section>}
+        {songs.length > 0 && <section className="content-section" aria-labelledby={`songs-${index}`}><div className="section-heading"><h3 id={`songs-${index}`}>On repeat</h3><span>{songs.length} tracks</span></div><div className="song-list">{songs.map((song) => <a key={song.spotifyId} href={`https://open.spotify.com/track/${song.spotifyId}`} target="_blank" rel="noopener noreferrer" className="song-row"><span className="song-icon">♫</span><span className="song-meta"><strong>{song.title}</strong><small>{song.artist}</small></span><span aria-hidden="true">↗</span></a>)}</div></section>}
+        {tweets.length > 0 && <section className="content-section" aria-labelledby={`posts-${index}`}><div className="section-heading"><h3 id={`posts-${index}`}>In the feed</h3><span>{tweets.length} posts</span></div><div className="post-grid">{tweets.map((post, i) => <blockquote key={`${post.handle}-${i}`} className="post"><p>“{post.text}”</p><footer><strong>{post.author}</strong><span>{post.handle.startsWith('@') ? post.handle : `@${post.handle}`} · {post.date}</span></footer></blockquote>)}</div></section>}
+      </div>
+      <div className="chapter-end"><span>✳</span><span>{index === ERAS.length - 1 ? 'YOU REACHED THE BEGINNING' : `NEXT: ${ERAS[index + 1].years}`}</span><span>↓</span></div>
+    </div>
+  </section>
 }
 
 export default function Home() {
+  const [activeEra, setActiveEra] = useState(ERAS[0].years)
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
   const [showSources, setShowSources] = useState(false)
-  const [randomSeed, setRandomSeed] = useState(0)
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
-  const [isMounted, setIsMounted] = useState(false)
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null)
-  const dialRef = useRef<HTMLDivElement | null>(null)
-  const [isDragging, setIsDragging] = useState(false)
-
-  // Set random seed on client only
   useEffect(() => {
-    setRandomSeed(Math.random())
+    const sections = ERAS.map((era) => document.getElementById(era.years)).filter((el): el is HTMLElement => !!el)
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+      if (visible[0]) setActiveEra(visible[0].target.id)
+    }, { rootMargin: '-120px 0px -55% 0px' })
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
   }, [])
-
-  // Delay mount for smooth fade-in
   useEffect(() => {
-    const timer = setTimeout(() => setIsMounted(true), 200)
-    return () => clearTimeout(timer)
-  }, [])
-
-  // Generate timeline: current year back to 2000
-  const timeline = useMemo(() => {
-    const start = new Date().getFullYear()
-    const years: number[] = []
-    for (let y = start; y >= 2000; y--) {
-      years.push(y)
-    }
-    return years
-  }, [])
-
-  // Shuffle utility with seed
-  const shuffleArray = <T,>(array: T[], seed: number): T[] => {
-    const shuffled = [...array]
-    let currentSeed = seed
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      currentSeed = (currentSeed * 9301 + 49297) % 233280
-      const j = Math.floor((currentSeed / 233280) * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-    }
-    return shuffled
+    if (!window.matchMedia('(max-width: 740px)').matches) return
+    const list = document.querySelector<HTMLElement>('.era-list')
+    const button = Array.from(list?.querySelectorAll<HTMLButtonElement>('.era-button') || [])
+      .find((item) => item.dataset.era === activeEra)
+    if (list && button) list.scrollTo({ left: button.offsetLeft - list.offsetLeft - (list.clientWidth - button.clientWidth) / 2, behavior: 'smooth' })
+  }, [activeEra])
+  function goToEra(years: string) {
+    document.getElementById(years)?.scrollIntoView({ behavior: 'smooth' })
   }
-
-  // Helper to get era from year
-  const getEra = (year: number): string => {
-    if (year >= 2025) return '2025-2026'
-    if (year >= 2022) return '2022-2024'
-    if (year >= 2019) return '2019-2021'
-    if (year >= 2016) return '2016-2018'
-    if (year >= 2013) return '2013-2015'
-    if (year >= 2010) return '2010-2012'
-    if (year >= 2007) return '2007-2009'
-    if (year >= 2004) return '2004-2006'
-    return '2000-2003'
-  }
-
-  // Allow items to repeat up to 3 times max
-  const pickWithLimit = <T,>(
-    items: T[],
-    getId: (item: T) => string,
-    want: number,
-    seed: number,
-    usageCounts: Map<string, number>,
-    maxUsage: number = 3
-  ): T[] => {
-    if (!items.length || want <= 0) return []
-    const shuffled = shuffleArray(items, seed)
-    const result: T[] = []
-    for (let i = 0; i < shuffled.length && result.length < want; i++) {
-      const id = getId(shuffled[i])
-      if (!id) continue
-      const currentUsage = usageCounts.get(id) || 0
-      if (currentUsage >= maxUsage) continue
-      usageCounts.set(id, currentUsage + 1)
-      result.push(shuffled[i])
-    }
-    return result
-  }
-
-  // Track horizontal scroll to update current year
-  useEffect(() => {
-    const container = scrollContainerRef.current
-    if (!container) return
-
-    const handleScroll = () => {
-      const scrollLeft = container.scrollLeft
-      const scrollWidth = container.scrollWidth - container.clientWidth
-      const scrollPercent = scrollWidth > 0 ? scrollLeft / scrollWidth : 0
-      
-      // Map scroll position to year (left = current, right = 2000)
-      const currentYearValue = new Date().getFullYear()
-      const yearRange = currentYearValue - 2000
-      const year = Math.round(currentYearValue - scrollPercent * yearRange)
-      setCurrentYear(Math.max(2000, Math.min(currentYearValue, year)))
-    }
-
-    container.addEventListener('scroll', handleScroll, { passive: true })
-    return () => container.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  // Dial interaction - horizontal mapping
-  const scrollToYear = useCallback((targetYear: number) => {
-    const container = scrollContainerRef.current
-    if (!container) return
-    
-    const currentYearValue = new Date().getFullYear()
-    const yearRange = currentYearValue - 2000
-    const scrollWidth = container.scrollWidth - container.clientWidth
-    const targetPercent = (currentYearValue - targetYear) / yearRange
-    const targetScroll = targetPercent * scrollWidth
-    
-    container.scrollTo({ left: targetScroll, behavior: 'smooth' })
-  }, [])
-
-  const handleDialInteraction = useCallback((clientX: number) => {
-    if (!dialRef.current) return
-    
-    const rect = dialRef.current.getBoundingClientRect()
-    const relativeX = clientX - rect.left
-    const percentage = Math.max(0, Math.min(1, relativeX / rect.width))
-    
-    // Map horizontal position to year (left = current, right = 2000)
-    const currentYearValue = new Date().getFullYear()
-    const targetYear = Math.round(currentYearValue - percentage * (currentYearValue - 2000))
-    
-    scrollToYear(targetYear)
-  }, [scrollToYear])
-
-  const handleDialMouseDown = useCallback((e: React.MouseEvent) => {
-    e.preventDefault()
-    setIsDragging(true)
-    handleDialInteraction(e.clientX)
-  }, [handleDialInteraction])
-
-  const handleDialTouchStart = useCallback((e: React.TouchEvent) => {
-    if (e.touches.length > 0) {
-      setIsDragging(true)
-      handleDialInteraction(e.touches[0].clientX)
-    }
-  }, [handleDialInteraction])
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (isDragging) handleDialInteraction(e.clientX)
-    }
-    const handleTouchMove = (e: TouchEvent) => {
-      if (isDragging && e.touches.length > 0) handleDialInteraction(e.touches[0].clientX)
-    }
-    const handleEnd = () => setIsDragging(false)
-
-    if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove)
-      document.addEventListener('mouseup', handleEnd)
-      document.addEventListener('touchmove', handleTouchMove)
-      document.addEventListener('touchend', handleEnd)
-      document.body.style.cursor = 'grabbing'
-    }
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseup', handleEnd)
-      document.removeEventListener('touchmove', handleTouchMove)
-      document.removeEventListener('touchend', handleEnd)
-      document.body.style.cursor = ''
-    }
-  }, [isDragging, handleDialInteraction])
-
-  // Build all year data with NO REPEATS - each item appears only once
-  const yearData = useMemo(() => {
-    const wordUsage = new Map<string, number>()
-    const mediaUsage = new Map<string, number>()
-    const songUsage = new Map<string, number>()
-    const tweetUsage = new Map<string, number>()
-
-    return timeline.map((year, index) => {
-      const era = getEra(year)
-      const eraTerms = getTermsForEra(era)
-      const eraMedia = ERA_MEDIA[era] || []
-      const eraSongs = ERA_SONGS[era] || []
-      const eraTweets = ERA_TWEETS[era] || []
-
-      const wordsPerYear = year >= 2020 ? 20 : year >= 2010 ? 16 : 12
-      const mediaPerYear = year >= 2016 ? 4 : 3
-      const tweetsPerYear = year >= 2016 ? 5 : 3
-
-      const pickedTerms = pickWithLimit(
-        eraTerms,
-        (t) => t.text.toLowerCase(),
-        wordsPerYear,
-        randomSeed + index * 17,
-        wordUsage,
-        1 // NO REPEATS
-      )
-
-      const media = pickWithLimit(
-        eraMedia,
-        (m: any) => `${m.type}:${m.id || m.url}`,
-        mediaPerYear,
-        randomSeed + 1000 + index * 19,
-        mediaUsage,
-        1 // NO REPEATS
-      )
-
-      const songs = pickWithLimit(
-        eraSongs,
-        (s: any) => s.spotifyId,
-        3,
-        randomSeed + 2000 + index * 23,
-        songUsage,
-        1 // NO REPEATS
-      )
-
-      const tweets = pickWithLimit(
-        eraTweets,
-        (t: any) => `${t.handle}:${t.text.substring(0, 20)}`,
-        tweetsPerYear,
-        randomSeed + 3000 + index * 29,
-        tweetUsage,
-        1 // NO REPEATS
-      )
-
-      // Calculate word sizes
-      const counts = pickedTerms.map((t) => t.count)
-      const minCount = counts.length ? Math.min(...counts) : 1
-      const maxCount = counts.length ? Math.max(...counts) : 1
-      const wordCloudWords = pickedTerms.map((w) => {
-        const normalizedSize = maxCount > minCount ? (w.count - minCount) / (maxCount - minCount) : 0.5
-        const fontSize = 20 + normalizedSize * 40
-        return { text: w.text, size: fontSize }
-      })
-
-      return { year, media, songs, tweets, wordCloudWords }
-    })
-  }, [timeline, randomSeed])
-
-  return (
-    <main className="relative bg-black min-h-screen flex flex-col">
-      {/* Fixed Header */}
-      <div className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 md:py-6 bg-black/90 backdrop-blur-lg border-b border-white/10">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <div>
-            <h1 className="text-lg md:text-2xl font-light tracking-[0.2em] md:tracking-[0.3em] text-white/90">
-              INTERNET NOSTALGIA
-            </h1>
-            <p className="text-xs md:text-sm text-white/60 mt-1">
-              scroll right to travel back in time →
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <button
-              className="text-xs text-white/60 underline hover:text-white transition"
-              onClick={() => setShowSources((v) => !v)}
-            >
-              {showSources ? 'hide' : 'sources'}
-            </button>
-            <a
-              href="https://fareeha.sh"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[11px] text-white/30 hover:text-white/60 transition-colors"
-            >
-              by fareeha ✨
-            </a>
-          </div>
-        </div>
-
-        {showSources && (
-          <div className="mt-4 text-xs text-white/70 bg-white/5 border border-white/10 rounded-lg p-3 max-w-7xl mx-auto">
-            <p className="font-semibold text-white/80">sources:</p>
-            <p>• reddit, twitter/x, youtube, spotify</p>
-          </div>
-        )}
-      </div>
-
-      {/* Horizontal Scroll Container - Continuous flow */}
-      <div 
-        ref={scrollContainerRef}
-        className="flex-1 overflow-x-auto overflow-y-auto pt-20 md:pt-24 pb-16 md:pb-20"
-        style={{ 
-          scrollBehavior: 'smooth',
-          WebkitOverflowScrolling: 'touch',
-        }}
-      >
-        <div 
-          className={`flex items-start transition-opacity duration-1000 ${isMounted ? 'opacity-100' : 'opacity-0'}`}
-          style={{ minHeight: 'calc(100vh - 140px)' }}
-        >
-          {yearData.map((data, index) => (
-            <div
-              key={data.year}
-              data-year={data.year}
-              className="flex-shrink-0"
-            >
-              <FloatingWordCloud
-                words={data.wordCloudWords}
-                media={data.media}
-                songs={data.songs}
-                tweets={data.tweets}
-                onVideoSelect={setSelectedVideo}
-              />
-            </div>
-          ))}
-
-          {/* End marker */}
-          <div className="flex-shrink-0 flex items-center justify-center px-8 min-w-[200px]">
-            <div className="text-center space-y-3">
-              <h2 className="text-2xl md:text-4xl font-light text-white/60 tracking-wide">
-                2000
-              </h2>
-              <p className="text-xs md:text-sm text-white/40">
-                the beginning
-              </p>
-              <button
-                onClick={() => scrollContainerRef.current?.scrollTo({ left: 0, behavior: 'smooth' })}
-                className="text-white/40 hover:text-white/70 transition-colors text-xs"
-              >
-                ← back
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Year Dial - Minimal */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 px-4 md:px-8 py-3 md:py-4 bg-black/80 backdrop-blur-sm">
-        <div className="max-w-3xl mx-auto flex items-center gap-4">
-          {/* Current year */}
-          <span className="text-xl md:text-2xl font-light text-white tracking-wider min-w-[60px]">
-            {currentYear}
-          </span>
-          
-          {/* Horizontal Dial - Minimal */}
-          <div 
-            ref={dialRef}
-            className="relative flex-1 h-6 md:h-8 cursor-grab active:cursor-grabbing touch-none select-none"
-            onMouseDown={handleDialMouseDown}
-            onTouchStart={handleDialTouchStart}
-          >
-            {/* Track line */}
-            <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-px bg-white/20" />
-            
-            {/* Current position indicator */}
-            <div 
-              className="absolute top-1/2 w-2 h-2 md:w-3 md:h-3 bg-white rounded-full transition-all duration-150"
-              style={{
-                left: `${((new Date().getFullYear() - currentYear) / (new Date().getFullYear() - 2000)) * 100}%`,
-                transform: 'translate(-50%, -50%)',
-              }}
-            />
-            
-            {/* Subtle tick marks */}
-            <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between">
-              {Array.from({ length: 14 }).map((_, i) => (
-                <div 
-                  key={i} 
-                  className="w-px h-2 bg-white/10"
-                />
-              ))}
-            </div>
-          </div>
-          
-          {/* End year */}
-          <span className="text-sm md:text-base font-light text-white/40 min-w-[40px] text-right">
-            2000
-          </span>
-        </div>
-      </div>
-
-      {/* Media Gallery */}
-      <MediaGallery 
-        media={[]} 
-        selectedVideo={selectedVideo} 
-        onClose={() => setSelectedVideo(null)} 
-      />
-    </main>
-  )
+  return <main className="site-shell">
+    <header className="site-header"><a className="brand" href="#top" aria-label="Internet Nostalgia, back to top"><span className="brand-mark">◉</span><span>INTERNET<br />NOSTALGIA</span></a><div className="header-actions"><button type="button" onClick={() => setShowSources(!showSources)} aria-expanded={showSources}>About &amp; sources</button><a href="https://fareeha.sh" target="_blank" rel="noopener noreferrer">by fareeha ↗</a></div></header>
+    {showSources && <aside className="source-note">A curated time capsule of internet culture from 2000 to 2026. Explore words, videos, music and posts from each era. Media links open YouTube, Giphy, Imgur or Spotify.</aside>}
+    <div id="top" className="opening"><span className="eyebrow">AN INTERNET TIME CAPSULE · 2000—2026</span><h1>Remember<br />the internet<span className="period">?</span></h1><p>Scroll through nine chapters of things we watched, said and had on repeat. Start here, and keep going back.</p><button type="button" onClick={() => goToEra(ERAS[0].years)}>START SCROLLING <span>↓</span></button><div className="opening-deco" aria-hidden="true">✳</div></div>
+    <div className="archive-layout"><nav className="era-nav" aria-label="Jump to an era"><p className="eyebrow nav-label">THE TIMELINE</p><div className="era-list">{ERAS.map((item) => <button type="button" key={item.years} data-era={item.years} className={`era-button ${activeEra === item.years ? 'active' : ''}`} onClick={() => goToEra(item.years)} aria-current={activeEra === item.years ? 'step' : undefined}><span>{item.years}</span><small>{item.label}</small></button>)}</div></nav><div className="archive-content">{ERAS.map((era, index) => <EraSection key={era.years} era={era} index={index} onPlay={setSelectedVideo} />)}<footer className="journey-end"><span>✳</span><h2>That&apos;s all, for now.</h2><p>You made it back to the beginning of this little corner of the web.</p><button type="button" onClick={() => document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' })}>BACK TO THE PRESENT ↑</button></footer></div></div>
+    <MediaGallery media={[]} selectedVideo={selectedVideo} onClose={() => setSelectedVideo(null)} />
+  </main>
 }

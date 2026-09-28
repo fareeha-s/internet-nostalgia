@@ -16,16 +16,13 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      - uses: oven-sh/setup-bun@v2
 
       - name: Install dependencies
-        run: npm ci
+        run: bun install --frozen-lockfile
 
       - name: Update trending words
-        run: node scripts/updateTrendingWords.js
+        run: bun scripts/updateTrendingWords.js
 
       - name: Check for changes
         id: verify-changed-files
@@ -43,18 +40,5 @@ jobs:
           git config user.email "fareeha.salahuddin@gmail.com"
           git add app/utils/eraData.ts
           git commit -m "Auto-update: Refresh trending words for $(date +%B\ %Y)"
-          git push origin main
-
-      - name: Build and deploy
-        if: steps.verify-changed-files.outputs.changed == 'true'
-        run: |
-          npm run export
-          rm -rf _next index.html 404.html
-          mkdir -p _next
-          cp -r .next/static ./_next/
-          cp .next/server/app/index.html ./index.html
-          cp .next/server/app/_not-found.html ./404.html
-          git add _next index.html 404.html
-          git commit -m "Auto-deploy: Rebuild site with updated words" || exit 0
           git push origin main
 
