@@ -82,7 +82,7 @@ export default function Home() {
           </div>
         })}
       </section>)}
-      <footer className="feed-end">that's as far back as this goes. <a href="#top">back to top ↑</a></footer>
+      <footer className="feed-end">that&apos;s as far back as this goes. <a href="#top">back to top ↑</a></footer>
     </div>
     <MediaGallery media={[]} selectedVideo={selectedVideo} onClose={() => setSelectedVideo(null)} />
   </main>
