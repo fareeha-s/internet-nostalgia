@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ERA_MEDIA, type MediaItem } from './data/media'
 import { ERA_SONGS, type SongItem } from './data/songs'
 import { ERA_TWEETS, type TweetItem } from './data/tweets'
@@ -53,7 +53,7 @@ function MediaFragment({ item, onPlay }: { item: MediaItem; onPlay: (id: string)
   </>
   return item.type === 'youtube'
     ? <button type="button" className="media-fragment" onClick={() => onPlay(item.id)} aria-label={`Watch ${item.title}`}>{content}</button>
-    : <a className="media-fragment" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${item.title}`}>{content}</a>
+    : <a className="media-fragment" href={item.sourceUrl || item.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${item.title}`}>{content}</a>
 }
 
 function FragmentView({ fragment, index, onPlay }: { fragment: Fragment; index: number; onPlay: (id: string) => void }) {
@@ -67,6 +67,28 @@ export default function Home() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
   const [showAbout, setShowAbout] = useState(false)
   let clusterNumber = 0
+
+  useEffect(() => {
+    const root = document.querySelector('.site-shell')
+    const clusters = document.querySelectorAll('.cloud-cluster, .time-cue')
+    if (!root || !('IntersectionObserver' in window)) return
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { rootMargin: '0px 0px -4% 0px', threshold: 0.01 })
+
+    clusters.forEach((cluster) => observer.observe(cluster))
+    root.classList.add('reveal-ready')
+    return () => {
+      observer.disconnect()
+      root.classList.remove('reveal-ready')
+    }
+  }, [])
 
   return <main className="site-shell" id="top">
     <header className="site-header"><h1 className="site-title">internet nostalgia</h1><button type="button" onClick={() => setShowAbout(!showAbout)} aria-expanded={showAbout}>about</button></header>
